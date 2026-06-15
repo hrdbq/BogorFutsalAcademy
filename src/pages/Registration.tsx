@@ -65,7 +65,7 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
       accent: false,
       perks: [
         'All Monthly Tier Perks included',
-        'Free official BCFA Home Match Player Jersey Kit',
+        'Free official BFA Home Match Player Jersey Kit',
         'Guaranteed exhibition match placements',
         'Prioritized academy event enrollments'
       ]
@@ -128,7 +128,7 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
     // Call state callback to register live entry
     onRegisterSubmit(formData);
 
-    const refCode = 'BCFA-2026-' + Math.floor(1000 + Math.random() * 9000);
+    const refCode = 'BFA-2026-' + Math.floor(1000 + Math.random() * 9000);
     setGeneratedRef(refCode);
     setFormCompleted(true);
     setStep(4); // Success step

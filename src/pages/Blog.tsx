@@ -132,7 +132,7 @@ export default function Blog({ posts }: BlogProps) {
           <div className="pt-8 border-t border-white/10 flex items-center justify-between">
             <div className="flex items-center space-x-2 text-white/40 text-xs font-mono">
               <AlertCircle size={14} className="text-accent-blue" />
-              <span>Content curated inside Bogor City Futsal Academy</span>
+              <span>Content curated inside Bogor Futsal Academy</span>
             </div>
             
             <button

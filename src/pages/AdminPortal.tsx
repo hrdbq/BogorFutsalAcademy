@@ -83,7 +83,7 @@ export default function AdminPortal({
   });
 
   const [blogForm, setBlogForm] = useState({
-    title: '', category: 'News' as const, excerpt: '', content: '', author: 'BCFA Editor', readTime: '5 min read', imageUrl: 'https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&q=80&w=800'
+    title: '', category: 'News' as const, excerpt: '', content: '', author: 'BFA Editor', readTime: '5 min read', imageUrl: 'https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&q=80&w=800'
   });
 
   const [sponsorForm, setSponsorForm] = useState({
@@ -250,7 +250,7 @@ export default function AdminPortal({
     };
     setBlog(prev => [entry, ...prev]);
     setShowAddForm(false);
-    setBlogForm({ title: '', category: 'News', excerpt: '', content: '', author: 'BCFA Editor', readTime: '5 min read', imageUrl: 'https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&q=80&w=800' });
+    setBlogForm({ title: '', category: 'News', excerpt: '', content: '', author: 'BFA Editor', readTime: '5 min read', imageUrl: 'https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&q=80&w=800' });
     handleAlert(`CMS Article Published: ${entry.title}`);
   };
 
@@ -308,7 +308,7 @@ export default function AdminPortal({
           <div className="lg:col-span-3 flex flex-col space-y-4">
             
             <div className="p-4 bg-secondary-navy rounded-xl border border-white/10 text-center">
-              <span className="font-display font-black text-xs text-accent-blue tracking-wider block uppercase">BCFA CMS CONSOLE</span>
+              <span className="font-display font-black text-xs text-accent-blue tracking-wider block uppercase">BFA CMS CONSOLE</span>
               <p className="text-[10px] text-white/45 mt-1 font-mono">Role: Super Administrator Mode Enabled</p>
             </div>
 
@@ -379,7 +379,7 @@ export default function AdminPortal({
             {/* Header Module Area */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-4 border-b border-white/10 gap-4">
               <div>
-                <span className="font-mono text-[9px] text-accent-blue font-bold uppercase tracking-widest leading-none">BCFA COLLECTION SERVICE</span>
+                <span className="font-mono text-[9px] text-accent-blue font-bold uppercase tracking-widest leading-none">BFA COLLECTION SERVICE</span>
                 <h2 className="font-display font-black text-2xl text-white uppercase tracking-tight mt-1">
                   {adminModulesList.find(m => m.id === activeModule)?.label}
                 </h2>

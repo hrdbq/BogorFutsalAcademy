@@ -154,7 +154,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
 
   const testimonials = [
     {
-      quote: "Enrolling Kimi in BCFA was the best sports decision we have made. The facility at GOR Pajajaran is top-notch, but the genuine care, discipline, and detailed progress review given by Coach Siti are what really changed his confidence.",
+      quote: "Enrolling Kimi in BFA was the best sports decision we have made. The facility at GOR Pajajaran is top-notch, but the genuine care, discipline, and detailed progress review given by Coach Siti are what really changed his confidence.",
       author: "Hendra Wijaya",
       role: "Father of Kimi (U9 Squad)",
       rating: 5,
@@ -163,12 +163,12 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
     {
       quote: "The tactical rotations I learned here allowed me to make a seamless transition into state-level trials. The coaches don't just instruct, they review session videos with you to pinpoint exact errors in your visual tracking.",
       author: "Farhan Saputra",
-      role: "BCFA Elite U18 Captain",
+      role: "BFA Elite U18 Captain",
       rating: 5,
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=155"
     },
     {
-      quote: "BCFA stands out because of its absolute professionalism. There is no flat larping or disorganized practice. Everything from schedule clocks to physiotherapy and tournament registrations is transparently communicated to parents.",
+      quote: "BFA stands out because of its absolute professionalism. There is no flat larping or disorganized practice. Everything from schedule clocks to physiotherapy and tournament registrations is transparently communicated to parents.",
       author: "Amelia Siregar",
       role: "Mother of Zacky (U13 Squad)",
       rating: 5,
@@ -291,7 +291,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
               COORDINATION • TECHNIQUE • MINDSET
             </span>
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight">
-              WHY ELITE FUTSAL PATHS BEGIN WITH BCFA
+              WHY ELITE FUTSAL PATHS BEGIN WITH BFA
             </h2>
             <p className="text-white/60 text-sm sm:text-base leading-relaxed">
               We operate differently than casual football clubs. Our primary core dedication is sports science efficiency, individual physical confidence, and a continuous pipeline pathway toward Indonesian national systems.
@@ -802,10 +802,6 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
 
             {/* Right Column: High-Intensity Schedule (30% - 4/12 Columns) */}
             <div className="lg:col-span-4 flex flex-col justify-between bg-secondary-navy/40 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative min-h-[460px] group glow-border">
-              {/* Corner Counter Indicator */}
-              <div className="absolute top-4 right-4 z-20">
-                <span className="text-white/30 font-mono text-xs font-bold">SCHED //</span>
-              </div>
 
               {/* Title Section */}
               <div className="space-y-4 pt-4">
@@ -907,7 +903,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
               SPORTS SCIENCE TRAINING BLUEPRINT
             </span>
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase">
-              THE 5 PILLARS OF BCFA DRILLS
+              THE 5 PILLARS OF BFA DRILLS
             </h2>
             <p className="text-white/60 text-sm">
               Our professional training blocks don&apos;t rely on random pick-up matching. Every session is systematically mapped into five fundamental steps of progression.
@@ -962,7 +958,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                 ACADEMY RECORD
               </h2>
               <p className="text-white/80 font-sans text-xs sm:text-sm leading-relaxed">
-                Bogor City Futsal Academy isn&apos;t just about coordination instruction; we enter competitive situations to verify our player development. Historically, our junior squads consistently rank at top podiums across regional, state, and invitational championships.
+                Bogor Futsal Academy isn&apos;t just about coordination instruction; we enter competitive situations to verify our player development. Historically, our junior squads consistently rank at top podiums across regional, state, and invitational championships.
               </p>
               
               <div className="space-y-3.5 bg-secondary-navy/60 p-5 rounded-2xl border border-white/10">
@@ -977,7 +973,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                   <Star size={18} className="text-accent-blue shrink-0 mt-0.5" />
                   <div>
                     <h5 className="font-display font-bold text-white text-sm uppercase">Regional Junior Cup MVP Selection</h5>
-                    <p className="text-white/60 text-xs mt-0.5">BCFA Academy student Raffi Saputra selected as 2025 regional Golden Boot winner</p>
+                    <p className="text-white/60 text-xs mt-0.5">BFA Academy student Raffi Saputra selected as 2025 regional Golden Boot winner</p>
                   </div>
                 </div>
               </div>

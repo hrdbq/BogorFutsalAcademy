@@ -44,7 +44,7 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
     { day: 18, hasEvent: true, title: 'Bogor Youth Championships' }, 
     { day: 19, hasEvent: false }, { day: 20, hasEvent: false }, { day: 21, hasEvent: false }, { day: 22, hasEvent: false },
     { day: 23, hasEvent: false }, { day: 24, hasEvent: false }, 
-    { day: 25, hasEvent: true, title: 'BCFA Elite Friendly Match' }, 
+    { day: 25, hasEvent: true, title: 'BFA Elite Friendly Match' }, 
     { day: 26, hasEvent: false }, { day: 27, hasEvent: false }, { day: 28, hasEvent: false }, { day: 29, hasEvent: false },
     { day: 30, hasEvent: false }, { day: 31, hasEvent: false }
   ];
@@ -211,8 +211,8 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
                 
                 <div className="flex items-center justify-between text-center py-2">
                   <div className="space-y-1">
-                    <span className="h-9 w-9 bg-accent-blue flex items-center justify-center rounded-lg font-display font-black text-primary-navy text-xs mx-auto">BC</span>
-                    <span className="block font-display font-black text-xs text-white uppercase tracking-tight">BCFA U18</span>
+                    <span className="h-9 w-9 bg-accent-blue flex items-center justify-center rounded-lg font-display font-black text-primary-navy text-xs mx-auto">BF</span>
+                    <span className="block font-display font-black text-xs text-white uppercase tracking-tight">BFA U18</span>
                   </div>
                   
                   <div className="space-y-1">
@@ -229,14 +229,14 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
                 </div>
 
                 <p className="text-[11px] text-white/70 font-sans leading-relaxed text-center">
-                  BCFA U18 clinched the gold trophy after scoring three outstanding clean goals during 2nd half fast transitions.
+                  BFA U18 clinched the gold trophy after scoring three outstanding clean goals during 2nd half fast transitions.
                 </p>
               </div>
             )}
 
             <div className="bg-secondary-navy/20 p-5 rounded-2xl border border-white/5">
               <h4 className="font-display font-bold text-sm text-white uppercase tracking-wider">Quick Info Contacts</h4>
-              <p className="text-white/60 text-xs mt-1">If your school desires friendly sparring matches against BCFA age squads, submit a coordinate request via the contact desk.</p>
+              <p className="text-white/60 text-xs mt-1">If your school desires friendly sparring matches against BFA age squads, submit a coordinate request via the contact desk.</p>
               <button 
                 onClick={() => setCurrentPage('contact')} 
                 className="mt-3 text-xs font-semibold text-accent-blue hover:underline uppercase flex items-center min-h-[40px] cursor-pointer"

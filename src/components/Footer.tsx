@@ -31,11 +31,11 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
               <img 
                 src={logoImg} 
                 alt="Bogor Futsal Academy" 
-                className="w-[55px] h-[55px] rounded-full object-cover border border-white/20 shadow-md"
+                className="w-[84px] h-[84px] rounded-full object-cover border border-white/20 shadow-md"
               />
               <div>
                 <h4 className="font-display font-black text-sm tracking-wider uppercase">
-                  BOGOR CITY
+                  BOGOR
                 </h4>
                 <p className="font-display text-[10px] font-bold text-accent-blue tracking-[0.2em] uppercase leading-none mt-0.5">
                   FUTSAL ACADEMY
@@ -182,7 +182,7 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
               </li>
               <li className="flex items-center space-x-2.5">
                 <Mail size={15} className="text-accent-blue shrink-0" />
-                <span>info@bogorcityfutsal.id</span>
+                <span>info@bogorfutsal.id</span>
               </li>
               <li className="flex items-center space-x-2.5">
                 <Clock size={15} className="text-accent-blue shrink-0" />
@@ -208,7 +208,7 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
 
         {/* End Credits copyright bar */}
         <div className="border-t border-white/5 pt-8 text-center text-[11px] text-white/45 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© {currentYear} Bogor City Futsal Academy (BCFA). All rights reserved.</p>
+          <p>© {currentYear} Bogor Futsal Academy (BFA). All rights reserved.</p>
           <div className="flex space-x-6">
             <button 
               onClick={() => handlePageClick('contact')} 

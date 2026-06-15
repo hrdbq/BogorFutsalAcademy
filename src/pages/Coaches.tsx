@@ -77,10 +77,10 @@ export default function Coaches({ coaches, setCurrentPage }: CoachesProps) {
             </h3>
             
             <p className="text-white/80 font-sans text-xs sm:text-sm leading-relaxed">
-              Selamat Datang to Bogor City Futsal Academy. My absolute priority when designing this sports pathway was ensuring our curriculum does not simulate simple, uncoordinated kick-around play. Futsal requires extreme visual tracking, split-second speed adjustments, and rigorous physical coordination.
+              Selamat Datang to Bogor Futsal Academy. My absolute priority when designing this sports pathway was ensuring our curriculum does not simulate simple, uncoordinated kick-around play. Futsal requires extreme visual tracking, split-second speed adjustments, and rigorous physical coordination.
             </p>
             <p className="text-white/80 font-sans text-xs sm:text-sm leading-relaxed">
-              We look at player development as an investment in character, timing, and structural intelligence. Whether your child aspires to play professionally in the Pro Futsal League of Indonesia, or they simply want to develop high-level coordinate reflexes alongside disciplined team habits—BCFA provides the absolute environment of excellence.
+              We look at player development as an investment in character, timing, and structural intelligence. Whether your child aspires to play professionally in the Pro Futsal League of Indonesia, or they simply want to develop high-level coordinate reflexes alongside disciplined team habits—BFA provides the absolute environment of excellence.
             </p>
 
             <div className="flex items-center space-x-4 pt-4 border-t border-white/5 font-mono text-xs text-white/50">

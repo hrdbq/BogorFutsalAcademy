@@ -67,7 +67,7 @@ export default function Navbar({
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center justify-between transition-all duration-300 ${
-          isScrolled ? 'h-18' : 'h-24'
+          isScrolled ? 'h-28' : 'h-36'
         }`}>
           
           {/* Logo Brand container */}
@@ -79,7 +79,7 @@ export default function Navbar({
             <img 
               src={logoImg} 
               alt="Bogor Futsal Academy" 
-              className="w-[55px] h-[55px] rounded-full object-cover border border-white/20"
+              className="w-[84px] h-[84px] rounded-full object-cover border border-white/20"
             />
             <div className="flex flex-col">
               <span className="font-display font-black text-sm tracking-[0.14em] text-white uppercase leading-none">

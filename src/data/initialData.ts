@@ -235,12 +235,12 @@ export const INITIAL_EVENTS: AcademyEvent[] = [
     time: '08:00 - 17:00 WIB',
     location: 'GOR Pajajaran Indoor Stadium',
     status: 'Upcoming',
-    details: 'The ultimate annual regional futsal trophy for West Java sports academies. Bogor City Futsal Academy will deploy three age-category squads (U12, U15, U18) to contest the coveted trophy.',
+    details: 'The ultimate annual regional futsal trophy for West Java sports academies. Bogor Futsal Academy will deploy three age-category squads (U12, U15, U18) to contest the coveted trophy.',
     imageUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=1200'
   },
   {
     id: 'ev2',
-    title: 'Friendly Match: BCFA Elite vs Jakarta Junior Academy',
+    title: 'Friendly Match: BFA Elite vs Jakarta Junior Academy',
     type: 'Match',
     date: '2026-06-25',
     time: '19:00 - 21:00 WIB',
@@ -271,7 +271,7 @@ export const INITIAL_EVENTS: AcademyEvent[] = [
     opponent: 'Bandung Raya Futsal Club U18',
     status: 'Past',
     result: 'Won 5-3 vs Bandung Raya U18',
-    details: 'An absolute thriller. After trailing 1-2 in the first-half, BCFA U18 mounted a masterful counter-attack press in the final ten minutes, securing thirty consecutive passes and scoring three spectacular decisive goals.',
+    details: 'An absolute thriller. After trailing 1-2 in the first-half, BFA U18 mounted a masterful counter-attack press in the final ten minutes, securing thirty consecutive passes and scoring three spectacular decisive goals.',
     imageUrl: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&q=80&w=1200'
   }
 ];
@@ -388,7 +388,7 @@ export const INITIAL_BLOG: BlogPost[] = [
   },
   {
     id: 'b2',
-    title: 'Recap: How BCFA U18 Stunned Bandung in the Finals',
+    title: 'Recap: How BFA U18 Stunned Bandung in the Finals',
     category: 'Match Reports',
     excerpt: 'An inside look at the tactical adjustment Coach Rian Pratama made during halftime to overcome Bandung Raya\'s high defensive press, winning the championship cup.',
     content: `It was a high-octane battle of nerves in Bandung. For the first twenty minutes, our U18 squad appeared suffocated by Bandung Raya\'s physical 1-2-2 press structure. We fell behind 1-2 due to simple passing transition lag near our own circle.
@@ -398,7 +398,7 @@ export const INITIAL_BLOG: BlogPost[] = [
     - **Transition Speed:** Demanded 2-touch soccer in our own half.
     - **Goalkeeper Participation:** Handed our keeper the liberty to act as a fifth runner (flying goalkeeper) to create numeric overload.
 
-    The outcome was masterful. Bandung's energy depleted trying to close the spatial traps, allowing Farhan to strike consecutive brace goals at the 12th and 18th minutes of the second period. Final scoreboard reading 5-3, placing Bogor City Futsal Academy as regional champions yet again!`,
+    The outcome was masterful. Bandung's energy depleted trying to close the spatial traps, allowing Farhan to strike consecutive brace goals at the 12th and 18th minutes of the second period. Final scoreboard reading 5-3, placing Bogor Futsal Academy as regional champions yet again!`,
     author: 'Coach Rian Pratama',
     date: '2026-05-12',
     readTime: '6 min read',
@@ -416,7 +416,7 @@ export const INITIAL_BLOG: BlogPost[] = [
     - **Tight-Space Decision Making:** Futsal is played within strict boundaries. There is no sideline buffer. Your child learns to think under heavy pressure.
     - **No Flat Recovery:** Because there are fewer players, everyone is constantly dynamic. Defending, transitioning, and scoring are team-wide responsibilities.
 
-    At Bogor City Futsal Academy, we structure our programs to ensure the motor coordination built in futsal seamlessly prepares your athlete for professional pursuits—whether on the indoor court or transitioning eventually to the soccer field.`,
+    At Bogor Futsal Academy, we structure our programs to ensure the motor coordination built in futsal seamlessly prepares your athlete for professional pursuits—whether on the indoor court or transitioning eventually to the soccer field.`,
     author: 'Siti Rahmawati',
     date: '2026-04-05',
     readTime: '5 min read',
@@ -465,7 +465,7 @@ export const INITIAL_INQUIRIES: ContactInquiry[] = [
     email: 'theresa.amel@outlook.com',
     phone: '+62 878-1122-3344',
     subject: 'Corporate Tournament Collaboration',
-    message: 'We are organizing an inter-enterprise friendship cup next quarter and are looking to hire BCFA certified staff to officiate and coordinate referee services. Let us know who to contact.',
+    message: 'We are organizing an inter-enterprise friendship cup next quarter and are looking to hire BFA certified staff to officiate and coordinate referee services. Let us know who to contact.',
     date: '2026-06-12 14:10',
     status: 'Read'
   }

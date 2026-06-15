@@ -149,7 +149,7 @@ function ProgramCard({ prog, coaches, setCurrentPage, handleDownload, downloadSu
           
           {downloadSuccess === prog.title && (
             <span className="text-green-400 font-mono text-[10px] flex items-center gap-1 animate-pulse">
-              ✓ BCFA-{prog.id.replace(' ', '')}-2026.pdf
+              ✓ BFA-{prog.id.replace(' ', '')}-2026.pdf
             </span>
           )}
         </div>

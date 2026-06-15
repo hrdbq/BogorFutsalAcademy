@@ -210,13 +210,13 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
 
                 {/* Email */}
                 <a 
-                  href="mailto:info@bogorcityfutsal.id"
+                  href="mailto:info@bogorfutsal.id"
                   className="flex items-start space-x-3.5 p-3 rounded-xl bg-primary-navy/55 border border-white/5 hover:border-accent-blue/40 transition-all cursor-pointer min-h-[50px]"
                 >
                   <Mail className="text-accent-blue mt-0.5 shrink-0" size={18} />
                   <div>
                     <span className="font-display font-black text-xs text-white block uppercase">General Administration Email</span>
-                    <span className="text-[10px] text-white/50 font-mono block mt-0.5">info@bogorcityfutsal.id</span>
+                    <span className="text-[10px] text-white/50 font-mono block mt-0.5">info@bogorfutsal.id</span>
                   </div>
                 </a>
 

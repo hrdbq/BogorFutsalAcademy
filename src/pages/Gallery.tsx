@@ -223,7 +223,7 @@ export default function Gallery({ galleryItems }: GalleryProps) {
                 
                 <div className="flex items-center space-x-2 text-[10px] uppercase font-mono text-white/50 bg-[#082C5A] border border-white/5 px-3 py-1.5 rounded-lg">
                   <ShieldCheck size={14} className="text-[#64B5E6]" />
-                  <span>BCFA Authorized Media</span>
+                  <span>BFA Authorized Media</span>
                 </div>
               </div>
 
