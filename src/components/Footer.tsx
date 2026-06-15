@@ -31,7 +31,7 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
               <img 
                 src={logoImg} 
                 alt="Bogor Futsal Academy" 
-                className="w-[46px] h-[46px] rounded-full object-cover border border-white/20 shadow-md"
+                className="w-[55px] h-[55px] rounded-full object-cover border border-white/20 shadow-md"
               />
               <div>
                 <h4 className="font-display font-black text-sm tracking-wider uppercase">

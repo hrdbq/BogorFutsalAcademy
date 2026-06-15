@@ -79,7 +79,7 @@ export default function Navbar({
             <img 
               src={logoImg} 
               alt="Bogor Futsal Academy" 
-              className="w-[46px] h-[46px] rounded-full object-cover border border-white/20"
+              className="w-[55px] h-[55px] rounded-full object-cover border border-white/20"
             />
             <div className="flex flex-col">
               <span className="font-display font-black text-sm tracking-[0.14em] text-white uppercase leading-none">
