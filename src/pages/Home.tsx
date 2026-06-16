@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Award, Shield, Calendar, Users, Trophy, ChevronRight, Play, CheckCircle2, Star, Quote, ArrowRight, Activity, Zap, MapPin, Clock
 } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 import heroImg from '../assets/images/hero_futsal_player_1781501597832.jpg';
 import heroVideo from '../assets/images/video.mp4';
 import kidsPathwayImg from '../assets/images/kids_pathway_player_1781504530272.jpg';
@@ -21,6 +22,7 @@ interface HomeProps {
 }
 
 export default function Home({ setCurrentPage, sponsors }: HomeProps) {
+  const { language, t } = useLanguage();
   const [activeAgeCategory, setActiveAgeCategory] = useState('Kids');
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
@@ -42,83 +44,107 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
 
   const whyChooseUsData = [
     {
-      title: 'Licensed Pro Coaches',
-      description: 'Instruction led exclusively by AFC Futsal License holders and former Professional League athletes equipped with modern youth pedagogy.',
+      title: t('choose.coaches_title'),
+      description: t('choose.coaches_desc'),
       icon: <Award className="text-accent-blue" size={28} />
     },
     {
-      title: 'Modern Structured Curriculum',
-      description: 'Progressive training blocks targeting rapid cognitive split-decision capabilities, physical explosiveness, and ultimate ball mastery.',
+      title: t('choose.curriculum_title'),
+      description: t('choose.curriculum_desc'),
       icon: <Shield className="text-accent-blue" size={28} />
     },
     {
-      title: 'Tournament Exposure',
-      description: 'Continuous integration in competitive leagues and regional futsal showcases ensuring high-intensity match experience.',
+      title: t('choose.exposure_title'),
+      description: t('choose.exposure_desc'),
       icon: <Trophy className="text-accent-blue" size={28} />
     },
     {
-      title: 'Professional Pathways',
-      description: 'Direct corporate ties to scouts, official sports clubs, and youth registries preparing players for future occupational sports roles.',
+      title: t('choose.pathways_title'),
+      description: t('choose.pathways_desc'),
       icon: <Zap className="text-accent-blue" size={28} />
     }
   ];
 
   const ageData: { [key: string]: any } = {
     'Kids': {
-      title: 'Fun Futsal Foundation',
-      ageLabel: 'Akreditasi: Anak usia dibawah 6 tahun',
-      description: 'Memperkenalkan keceriaan dunia futsal sejak usia sedini mungkin. Fokus utama adalah pada koordinasi motorik kasar, kelincahan dasar, pemahaman spasial, dan sosialisasi anak melalui elemen permainan bola yang menyenangkan.',
-      goals: [
+      title: language === 'en' ? 'Fun Futsal Foundation' : 'Fondasi Futsal Anak',
+      ageLabel: language === 'en' ? 'Accreditation: Children under 6 years old' : 'Akreditasi: Anak usia dibawah 6 tahun',
+      description: language === 'en' 
+        ? 'Introducing the joy of the futsal world from the earliest age possible. Main focus is on gross motor coordination, fundamental agility, spatial awareness, and socialization through fun play elements.' 
+        : 'Memperkenalkan keceriaan dunia futsal sejak usia sedini mungkin. Fokus utama adalah pada koordinasi motorik kasar, kelincahan dasar, pemahaman spasial, dan sosialisasi anak melalui elemen permainan bola yang menyenangkan.',
+      goals: language === 'en' ? [
+        'Develop fundamental motor skills, coordinative running, and body balance',
+        'Build neat early ball control through active foot stimulation play',
+        'Coax movement confidence and miniature active cooperation in children'
+      ] : [
         'Mengembangkan keterampilan motorik dasar, lari koordinatif, dan keseimbangan tubuh',
         'Membangun kontrol bola awal secara menyenangkan dengan stimulasi kaki aktif',
         'Melatih rasa percaya diri anak ketika bergerak dan bekerja sama dalam kelompok kecil'
       ],
-      focus: '90% Fun & Coordination Games, 10% Ball Contact',
-      sessions: '2 Sesi per minggu (60 menit per sesi)',
+      focus: language === 'en' ? '90% Fun & Coordination Games, 10% Ball Contact' : '90% Game Menyenangkan & Koordinasi, 10% Kontak Bola',
+      sessions: language === 'en' ? '2 Sessions per week (60 minutes per session)' : '2 Sesi per minggu (60 menit per sesi)',
       imgUrl: kidsPathwayImg,
-      tagline: 'Tumbuh Bahagia & Aktif'
+      tagline: language === 'en' ? 'Grow Happy & Active' : 'Tumbuh Bahagia & Aktif'
     },
     'Junior': {
-      title: 'Technical Mastery Prep',
-      ageLabel: 'Akreditasi: Anak usia dibawah 10 tahun',
-      description: 'Langkah awal pematangan teknik futsal anak. Mulai memperkenalkan kontrol bola presisi menggunakan permukaan sol sepatu (sole control), teknik operan dasar yang akurat, serta pergerakan dinamis tanpa bola.',
-      goals: [
+      title: language === 'en' ? 'Technical Mastery Prep' : 'Kematangan Teknik Dasar',
+      ageLabel: language === 'en' ? 'Accreditation: Children under 10 years old' : 'Akreditasi: Anak usia dibawah 10 tahun',
+      description: language === 'en'
+        ? 'The first step of refining precise futsal mechanics. Introducing sole control recep, accurate base short passing, and dynamic movement without the ball.'
+        : 'Langkah awal pematangan teknik futsal anak. Mulai memperkenalkan kontrol bola presisi menggunakan permukaan sol sepatu (sole control), teknik operan dasar yang akurat, serta pergerakan dinamis tanpa bola.',
+      goals: language === 'en' ? [
+        'Master receiving the ball using the sole of the shoe smoothly',
+        'Drill inside-foot passing accuracy and on-field coordinates communication',
+        'Inculcate sportsmanship, exercise discipline, and high matching focus'
+      ] : [
         'Menguasai penerimaan bola menggunakan sol sepatu (sole reception) secara mulus',
         'Melatih akurasi operan kaki bagian dalam (short passing) serta komunikasi lapangan',
         'Menanamkan sportivitas tinggi, kedisiplinan berolahraga, dan fokus saat bertanding'
       ],
-      focus: '60% Teknik Dasar Futsal, 20% Strategi Sederhana, 20% Mini Games',
-      sessions: '2 Sesi per minggu + Weekend Exhibition Match',
+      focus: language === 'en' ? '60% Base Futsal Technique, 20% Simple Strategy, 20% Small Sided Games' : '60% Teknik Dasar Futsal, 20% Strategi Sederhana, 20% Mini Games',
+      sessions: language === 'en' ? '2 Sessions per week + Weekend Exhibition Match' : '2 Sesi per minggu + Pertandingan Eksibisi Akhir Pekan',
       imgUrl: juniorPathwayImg,
-      tagline: 'Fondasi Teknik & Disiplin'
+      tagline: language === 'en' ? 'Technique & Discipline Foundation' : 'Fondasi Teknik & Disiplin'
     },
     'Elite': {
-      title: 'Advanced Talent Development',
-      ageLabel: 'Akreditasi: Anak usia dibawah 13 tahun',
-      description: 'Memasuki tahap pematangan mekanik dan pemahaman taktis intensif. Pemain diajarkan duel satu lawan satu (1v1), pengambilan keputusan cepat di bawah tekanan tempo, serta peningkatan akselerasi fisik.',
-      goals: [
+      title: language === 'en' ? 'Advanced Talent Development' : 'Pengembangan Bakat Lanjutan',
+      ageLabel: language === 'en' ? 'Accreditation: Children under 13 years old' : 'Akreditasi: Anak usia dibawah 13 tahun',
+      description: language === 'en'
+        ? 'Entering technical matrix and intensive tactical gameplay. Players are drilled on 1v1 duels, quick decision-making under high tempos, and direct physical acceleration.'
+        : 'Memasuki tahap pematangan mekanik dan pemahaman taktis intensif. Pemain diajarkan duel satu lawan satu (1v1), pengambilan keputusan cepat di bawah tekanan tempo, serta peningkatan akselerasi fisik.',
+      goals: language === 'en' ? [
+        'Refine on-field cognitive intelligence (split-second decision making)',
+        'Train tactical transition models from attack to defense',
+        'Increase stamina reservoirs, movement velocity, and sustained core control'
+      ] : [
         'Mengasah kecerdasan kognitif di lapangan (split-second decision making)',
         'Melatih pola transisi ofensif-defensif dan duel perebutan bola secara taktis',
         'Meningkatkan kapasitas stamina, kelincahan gerak, dan kontrol bola berkelanjutan'
       ],
-      focus: '40% Transisi Taktis, 40% Penguasaan Bola Intensif, 20% Simulasi Kompetisi',
-      sessions: '3 Sesi per minggu + Keikutsertaan Liga Internal',
+      focus: language === 'en' ? '40% Tactical Transition, 40% Intensive Possession, 20% Competition Simulation' : '40% Transisi Taktis, 40% Penguasaan Bola Intensif, 20% Simulasi Kompetisi',
+      sessions: language === 'en' ? '3 Sessions per week + Internal League Deployment' : '3 Sesi per minggu + Keikutsertaan Liga Internal',
       imgUrl: elitePathwayImg,
-      tagline: 'Akurasi, Kecepatan, & Visi'
+      tagline: language === 'en' ? 'Accuracy, Speed, & Vision' : 'Akurasi, Kecepatan, & Visi'
     },
     'Elite Pro': {
-      title: 'Pre-Professional Pathway',
-      ageLabel: 'Akreditasi: Anak usia dibawah 15 tahun',
-      description: 'Menyiapkan talenta terbaik menuju persaingan profesional dan level kompetisi nasional kelas atas. Difokuskan pada pemahaman formasi rotasi futsal modern yang kompleks, taktik set-piece, analisis video pertandingan, serta pematangan ketahanan mental juara.',
-      goals: [
+      title: language === 'en' ? 'Pre-Professional Pathway' : 'Jalur Pra-Profesional',
+      ageLabel: language === 'en' ? 'Accreditation: Students under 15 years old' : 'Akreditasi: Anak usia dibawah 15 tahun',
+      description: language === 'en'
+        ? 'Preparing select top talents for professional leagues and national-level competitions. Focused on modern complex rotations, set-pieces, video analyses, and championship-grade mental fortitude.'
+        : 'Menyiapkan talenta terbaik menuju persaingan profesional dan level kompetisi nasional kelas atas. Difokuskan pada pemahaman formasi rotasi futsal modern yang kompleks, taktik set-piece, analisis video pertandingan, serta pematangan ketahanan mental juara.',
+      goals: language === 'en' ? [
+        'Understand complex rotational tactics (Alas, Fixo, and Pivot) dynamically',
+        'Polish set-piece dynamics, visual gameplay breakdowns, and specialized strategies',
+        'Build athlete-grade physical stamina and championship poise under pressure'
+      ] : [
         'Memahami rotasi taktis penuh secara dinamis (Alas, Fixo, dan Pivot)',
         'Pemolesan skema taktik khusus, analisis visual permainan, dan strategi set-piece',
         'Mempersiapkan fisik kelas atlet dan ketahanan mental tanding di kancah nasional'
       ],
-      focus: '30% Strategi & Set-Pieces, 40% Fisik & Conditioning, 30% Turnamen Regulasi',
-      sessions: '3 - 4 Sesi intensif per minggu + Turnamen Regional/Nasional',
+      focus: language === 'en' ? '30% Special Strategy & Set-Pieces, 40% Hard Conditioning, 30% Tournament Plays' : '30% Strategi & Set-Pieces, 40% Fisik & Conditioning, 30% Turnamen Regulasi',
+      sessions: language === 'en' ? '3 to 4 High Intensity Sessions per week + National Tours' : '3 - 4 Sesi intensif per minggu + Turnamen Regional/Nasional',
       imgUrl: eliteProPathwayImg,
-      tagline: 'Gerbang Menuju Profesional'
+      tagline: language === 'en' ? 'Gate to Professional Careers' : 'Gerbang Menuju Profesional'
     }
   };
 
@@ -127,52 +153,58 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
   const timelineSteps = [
     {
       num: '01',
-      title: 'Technical Foundation',
-      desc: 'Developing absolute comfort with both feet using the sole, instep, and external surfaces of the foot in tight spaces.'
+      title: t('drills.step1'),
+      desc: t('drills.step1_desc')
     },
     {
       num: '02',
-      title: 'Tactical Intelligence',
-      desc: 'Teaching spatial rotation, visual scanner habits, passing lane alignment, and numeric overload equations.'
+      title: t('drills.step2'),
+      desc: t('drills.step2_desc')
     },
     {
       num: '03',
-      title: 'Physical Conditioning',
-      desc: 'Futsal-specific cardiovascular intervals, sharp multidirectional accelerations, and core injury-prevention rehab.'
+      title: t('drills.step3'),
+      desc: t('drills.step3_desc')
     },
     {
       num: '04',
-      title: 'Mental Resilience',
-      desc: 'Acquiring focused team synchronization, coping with mistake stress, and maintaining discipline under physical exhaustion.'
+      title: t('drills.step4'),
+      desc: t('drills.step4_desc')
     },
     {
       num: '05',
-      title: 'Competitive Peak',
-      desc: 'Active deployment in national tournaments, scouts exhibitions, state-level leagues, and high-intensity match structures.'
+      title: t('drills.step5'),
+      desc: t('drills.step5_desc')
     }
   ];
 
   const testimonials = [
     {
-      quote: "Enrolling Kimi in BFA was the best sports decision we have made. The facility at GOR Pajajaran is top-notch, but the genuine care, discipline, and detailed progress review given by Coach Siti are what really changed his confidence.",
-      author: "Hendra Wijaya",
-      role: "Father of Kimi (U9 Squad)",
+      quote: language === 'en' 
+        ? 'Enrolling Kimi in BFA was the best sports decision we have made. The facility at GOR Pajajaran is top-notch, but the genuine care, discipline, and detailed progress review given by Coach Siti are what really changed his confidence.'
+        : 'Keputusan mendaftarkan Kimi di BFA adalah pilihan olahraga terbaik kami. Fasilitas di GOR Pajajaran luar biasa, tetapi kepedulian yang tulus, kedisiplinan, serta evaluasi perkembangan berkala dari Coach Siti yang benar-benar mengubah rasa percaya dirinya.',
+      author: 'Hendra Wijaya',
+      role: language === 'en' ? 'Father of Kimi (U9 Squad)' : 'Ayah dari Kimi (Skuat U9)',
       rating: 5,
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=155"
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=155'
     },
     {
-      quote: "The tactical rotations I learned here allowed me to make a seamless transition into state-level trials. The coaches don't just instruct, they review session videos with you to pinpoint exact errors in your visual tracking.",
-      author: "Farhan Saputra",
-      role: "BFA Elite U18 Captain",
+      quote: language === 'en'
+        ? 'The tactical rotations I learned here allowed me to make a seamless transition into state-level trials. The coaches don\'t just instruct, they review session videos with you to pinpoint exact errors in your visual tracking.'
+        : 'Rotasi taktis yang saya pelajari di sini membuat transisi saya ke seleksi tingkat provinsi berjalan lancar. Jajaran pelatih tidak hanya memberi instruksi, tetapi juga mengevaluasi video latihan bersama kami demi memperbaiki pembiasaan visual.',
+      author: 'Farhan Saputra',
+      role: language === 'en' ? 'BFA Elite U18 Captain' : 'Kapten Tim Elite U18 BFA',
       rating: 5,
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=155"
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=155'
     },
     {
-      quote: "BFA stands out because of its absolute professionalism. There is no flat larping or disorganized practice. Everything from schedule clocks to physiotherapy and tournament registrations is transparently communicated to parents.",
-      author: "Amelia Siregar",
-      role: "Mother of Zacky (U13 Squad)",
+      quote: language === 'en'
+        ? 'BFA stands out because of its absolute professionalism. There is no flat playing or disorganized practice. Everything from schedule clocks to physiotherapy and tournament registrations is transparently communicated to parents.'
+        : 'BFA menonjol karena profesionalismenya yang mutlak. Tidak ada latihan yang tidak teratur atau tidak terorganisasi. Semua hal dari ketepatan waktu jadwal latihan hingga fisioterapi dan pendaftaran turnamen dikomunikasikan secara transparan kepada orang tua murid.',
+      author: 'Amelia Siregar',
+      role: language === 'en' ? 'Mother of Zacky (U13 Squad)' : 'Ibu dari Zacky (Skuat U13)',
       rating: 5,
-      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=155"
+      avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=155'
     }
   ];
 
@@ -182,11 +214,11 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
       {/* SECTION 1 - HERO */}
       <section 
         id="home-hero-section" 
-        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary-navy"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#011B41]"
       >
         {/* Background Sports Video / Imagery */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-navy/95 via-primary-navy/80 to-primary-navy/60 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#011B41]/95 via-[#011B41]/80 to-[#011B41]/60 z-10" />
           <video
             autoPlay
             loop
@@ -212,13 +244,13 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
           <div className="max-w-4xl space-y-6">
 
             <h1 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight text-white uppercase leading-[0.95]">
-              DEVELOP SKILLS.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-accent-blue to-accent-blue/80">BUILD CHARACTER.</span><br />
-              CREATE CHAMPIONS.
+              {t('hero.title_part1')}<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-accent-blue to-accent-blue/80">{t('hero.title_part2')}</span><br />
+              {t('hero.title_part3')}
             </h1>
 
             <p className="text-white/80 font-sans text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed">
-              Professional futsal training designs engineered to unlock every player&apos;s potential through highly structured licensing coach models, tactical game curriculums, and national match exposure in Bogor.
+              {t('hero.desc')}
             </p>
 
             {/* CTAs */}
@@ -228,7 +260,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                 onClick={() => setCurrentPage('registration')}
                 className="bg-accent-blue hover:bg-accent-blue/90 text-primary-navy font-display font-black uppercase tracking-wider text-sm px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg shadow-accent-blue/20 min-h-[48px] cursor-pointer"
               >
-                <span>Join Free Trial Class</span>
+                <span>{t('hero.cta_trial')}</span>
                 <ArrowRight size={16} />
               </button>
 
@@ -237,7 +269,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                 onClick={() => setCurrentPage('programs')}
                 className="bg-secondary-navy hover:bg-secondary-navy/80 text-white font-display font-bold uppercase tracking-wider text-sm px-8 py-4 rounded-xl border border-white/20 transition-all duration-300 flex items-center justify-center space-x-2 min-h-[48px] cursor-pointer"
               >
-                <span>Explore Curriculums</span>
+                <span>{t('hero.cta_explore')}</span>
               </button>
             </div>
 
@@ -248,7 +280,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                   {enrollCount}+
                 </span>
                 <span className="block text-white/50 font-mono text-[10px] uppercase tracking-wider mt-1">
-                  Active Enrolled Students
+                  {t('hero.stat_active_students')}
                 </span>
               </div>
               <div id="stat-coaches">
@@ -256,7 +288,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                   {coachCount}
                 </span>
                 <span className="block text-white/50 font-mono text-[10px] uppercase tracking-wider mt-1">
-                  AFC Certified Coaches
+                  {t('hero.stat_certified_coaches')}
                 </span>
               </div>
               <div id="stat-sessions">
@@ -264,7 +296,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                   {(sessionCount / 1000).toFixed(1)}k+
                 </span>
                 <span className="block text-white/50 font-mono text-[10px] uppercase tracking-wider mt-1">
-                  Completed Drills
+                  {t('hero.stat_completed_drills')}
                 </span>
               </div>
               <div id="stat-trophies">
@@ -272,7 +304,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                   {trophyCount}+
                 </span>
                 <span className="block text-white/50 font-mono text-[10px] uppercase tracking-wider mt-1">
-                  Championship Gold Titles
+                  {t('hero.stat_gold_titles')}
                 </span>
               </div>
             </div>
@@ -288,13 +320,13 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
             <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-[0.25em] block">
-              COORDINATION • TECHNIQUE • MINDSET
+              {t('why.pillars_subtitle')}
             </span>
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight">
-              WHY ELITE FUTSAL PATHS BEGIN WITH BFA
+              {t('why.pillars_title')}
             </h2>
             <p className="text-white/60 text-sm sm:text-base leading-relaxed">
-              We operate differently than casual football clubs. Our primary core dedication is sports science efficiency, individual physical confidence, and a continuous pipeline pathway toward Indonesian national systems.
+              {t('why.pillars_desc')}
             </p>
           </div>
 
@@ -303,7 +335,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
             {/* CARD 1 (5/12 Columns) - Vertical Card (Licensed Pro Coaching) */}
             <div 
               id="why-card-pedagogy"
-              className="lg:col-span-5 bg-[#031633]/90 border border-white/10 rounded-xl overflow-hidden flex flex-col h-full shadow-2xl relative"
+              className="lg:col-span-5 bg-[#031633]/90 border border-white/10 rounded-xl overflow-hidden flex flex-col h-full shadow-2xl relative animate-fadeIn"
             >
               {/* Header with Slanted Banner at absolute top-0 left-0 */}
               <div className="absolute top-0 left-0 z-20 font-sans">
@@ -315,7 +347,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                 </div>
               </div>
               
-              {/* Sports Imagery - Full Bleed blending like Cards 2 & 3 */}
+              {/* Sports Imagery - Full Bleed blending */}
               <div className="relative h-60 w-full overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#031633] via-transparent to-transparent z-10" />
                 <img 
@@ -330,10 +362,10 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
               <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-3">
                   <h3 className="font-display font-black text-lg sm:text-xl text-white uppercase tracking-tight leading-tight">
-                    Licensed Pro Coaching Cadre
+                    {t('choose.coaches_title')}
                   </h3>
-                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-sans">
-                    Instruction is led exclusively by AFC Futsal License holders and former Professional League athletes equipped with modern sports pedagogy. We drill tactical split-second reactions.
+                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-sans text-left">
+                    {t('choose.coaches_desc')}
                   </p>
                 </div>
                 
@@ -351,7 +383,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                     }}
                     className="text-accent-blue font-display font-black text-xs uppercase tracking-wider flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer group"
                   >
-                    <span>MEET THE COACHES</span>
+                    <span>{t('nav.coaches')}</span>
                     <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
                   </button>
                 </div>
@@ -390,12 +422,9 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
 
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-display font-black text-2xl text-white uppercase tracking-tight leading-none">
-                      STRUCTURED
+                    <h3 className="font-display font-black text-2xl text-white uppercase tracking-tight leading-none text-left">
+                      {t('choose.curriculum_title')}
                     </h3>
-                    <span className="font-display font-black text-accent-blue text-2xl uppercase tracking-tight block mt-1">
-                      CURRICULUM
-                    </span>
                     <span className="font-mono text-[9px] text-white/50 uppercase tracking-widest block mt-2">
                       COGNITIVE SPORT DEVELOPMENT
                     </span>
@@ -403,8 +432,8 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
 
                   <div className="w-12 h-1 bg-accent-blue rounded" />
 
-                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-sans">
-                    Progressive training blocks targeting rapid cognitive split-decision capabilities, physical explosiveness, and ultimate ball mastery.
+                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-sans text-left">
+                    {t('choose.curriculum_desc')}
                   </p>
                 </div>
 
@@ -418,9 +447,9 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                         setCurrentPage('programs');
                       }
                     }}
-                    className="bg-white hover:bg-accent-blue hover:text-primary-navy text-primary-navy font-display font-black text-xs uppercase tracking-wider px-5 py-3 rounded shadow transition-all flex items-center justify-between gap-3 min-h-[44px] cursor-pointer group"
+                    className="why-cta-btn bg-white hover:bg-accent-blue hover:text-primary-navy text-primary-navy font-display font-black text-xs uppercase tracking-wider px-5 py-3 rounded shadow transition-all flex items-center justify-between gap-3 min-h-[44px] cursor-pointer group w-full"
                   >
-                    <span>EXPLORE PROGRAMS</span>
+                    <span>{t('hero.cta_explore')}</span>
                     <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
                   </button>
                 </div>
@@ -447,21 +476,18 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
 
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-display font-black text-2xl text-white uppercase tracking-tight leading-none">
-                      TOURNAMENT
+                    <h3 className="font-display font-black text-2xl text-white uppercase tracking-tight leading-none text-left">
+                      {t('choose.exposure_title')}
                     </h3>
-                    <span className="font-display font-black text-accent-blue text-2xl uppercase tracking-tight block mt-1">
-                      EXPOSURE
-                    </span>
-                    <span className="font-mono text-[9px] text-white/50 uppercase tracking-widest block mt-2">
+                    <span className="font-mono text-[9px] text-white/50 uppercase tracking-widest block mt-2 text-left">
                       COMPETITIVE ARENAS & TROPHIES
                     </span>
                   </div>
 
                   <div className="w-12 h-1 bg-accent-blue rounded" />
 
-                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-sans">
-                    Continuous integration in competitive regional leagues and national futsal showcases ensuring high-intensity match experience.
+                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-sans text-left">
+                    {t('choose.exposure_desc')}
                   </p>
                 </div>
 
@@ -475,9 +501,9 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                         setCurrentPage('events');
                       }
                     }}
-                    className="bg-white hover:bg-accent-blue hover:text-primary-navy text-primary-navy font-display font-black text-xs uppercase tracking-wider px-5 py-3 rounded shadow transition-all flex items-center justify-between gap-3 min-h-[44px] cursor-pointer group"
+                    className="why-cta-btn bg-white hover:bg-accent-blue hover:text-primary-navy text-primary-navy font-display font-black text-xs uppercase tracking-wider px-5 py-3 rounded shadow transition-all flex items-center justify-between gap-3 min-h-[44px] cursor-pointer group w-full"
                   >
-                    <span>VIEW EVENTS MAP</span>
+                    <span>{t('nav.events')}</span>
                     <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
                   </button>
                 </div>
@@ -511,7 +537,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                 </div>
               </div>
               
-              {/* Sports Imagery - Full Bleed blending like Cards 2 & 3 */}
+              {/* Sports Imagery - Full Bleed blending */}
               <div className="relative h-60 w-full overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-t from-[#031633] via-transparent to-transparent z-10" />
                 <img 
@@ -526,10 +552,10 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
               <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-3">
                   <h3 className="font-display font-black text-lg sm:text-xl text-white uppercase tracking-tight leading-tight">
-                    Professional Feeder Pathways
+                    {t('choose.pathways_title')}
                   </h3>
-                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-sans">
-                    Direct corporate ties to scouts, official sports clubs, and youth registries preparing gifted players for future occupational sport roles both national and international.
+                  <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-sans text-left">
+                    {t('choose.pathways_desc')}
                   </p>
                 </div>
                 
@@ -547,7 +573,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                     }}
                     className="text-accent-blue font-display font-black text-xs uppercase tracking-wider flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer group"
                   >
-                    <span>JOIN PRE-REGISTRATION</span>
+                    <span>{t('hero.cta_trial')}</span>
                     <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
                   </button>
                 </div>
@@ -566,13 +592,13 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
             <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-widest block">
-              AGE-SPECIFIC ADAPTATIONS
+              {t('pathway.subtitle')}
             </span>
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase tracking-tight">
-              PLAYER ROADMAP PATHWAY
+              {t('pathway.title')}
             </h2>
             <p className="text-white/60 text-xs sm:text-sm">
-              Each program is carefully optimized for its specific physical, tactical, and sensory age thresholds. Click our selectors below to explore our system.
+              {t('pathway.desc')}
             </p>
           </div>
 
@@ -658,7 +684,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                   <div className="space-y-5">
                     <div className="flex items-center space-x-3">
                       <span className="bg-accent-blue text-[#011B41] font-mono text-[10px] font-black px-2.5 py-1 rounded">
-                        {activeAgeCategory} SQUAD
+                        {language === 'en' ? `${activeAgeCategory} SQUAD` : `SQUAD ${activeAgeCategory.toUpperCase()}`}
                       </span>
                       <span className="text-white/40 font-mono text-xs">{currentAge.ageLabel}</span>
                     </div>
@@ -674,7 +700,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                     {/* Core checklist goals */}
                     <div className="space-y-2.5 bg-[#000d21]/40 p-4 sm:p-5 rounded-2xl border border-white/5">
                       <h5 className="font-mono text-xs font-bold uppercase tracking-wider text-accent-blue flex items-center gap-1.5">
-                        <Activity size={14} /> Key Development Benchmarks:
+                        <Activity size={14} /> {language === 'en' ? 'Key Development Benchmarks:' : 'Target Pengembangan Utama:'}
                       </h5>
                       <ul className="space-y-2 mt-2 font-sans text-xs text-white/70">
                         {currentAge.goals.map((g: string, i: number) => (
@@ -689,11 +715,15 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                     {/* Operational stats parameters */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="bg-[#000d21]/30 p-3 rounded-xl border border-white/5">
-                        <span className="text-white/40 font-mono text-[10px] uppercase block">Training Intensity Weight</span>
+                        <span className="text-white/40 font-mono text-[10px] uppercase block">
+                          {language === 'en' ? 'Training Intensity Weight' : 'Fokus & Intensitas Latihan'}
+                        </span>
                         <span className="text-white font-display text-xs font-bold block mt-1">{currentAge.focus}</span>
                       </div>
                       <div className="bg-[#000d21]/30 p-3 rounded-xl border border-white/5">
-                        <span className="text-white/40 font-mono text-[10px] uppercase block">Operational Schedule</span>
+                        <span className="text-white/40 font-mono text-[10px] uppercase block">
+                          {language === 'en' ? 'Operational Schedule' : 'Jadwal Operasional Latihan'}
+                        </span>
                         <span className="text-white font-display text-xs font-bold block mt-1">{currentAge.sessions}</span>
                       </div>
                     </div>
@@ -705,14 +735,14 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                       onClick={() => setCurrentPage('registration')}
                       className="bg-accent-blue hover:bg-accent-blue/90 text-[#011B41] font-display font-black uppercase text-xs tracking-widest px-6 py-3.5 rounded-xl transition-all duration-300 text-center min-h-[44px] cursor-pointer"
                     >
-                      JOIN TRIAL SQUAD
+                      {language === 'en' ? 'JOIN TRIAL SQUAD' : 'DAFTAR TRIAL GRATIS'}
                     </button>
                     <button
                       id="pathway-more-btn"
                       onClick={() => setCurrentPage('programs')}
                       className="bg-transparent hover:bg-white/5 text-white font-display font-bold uppercase text-xs tracking-wider px-6 py-3.5 rounded-xl transition-all duration-300 text-center border border-white/20 min-h-[44px] cursor-pointer"
                     >
-                      View Class Curriculum
+                      {language === 'en' ? 'View Class Curriculum' : 'Pelajari Kurikulum'}
                     </button>
                   </div>
                 </motion.div>
@@ -725,40 +755,44 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
       </section>
 
       {/* NEW SECTION - CLASSES & PRACTICE VENUE */}
-      <section id="classes" className="py-24 bg-primary-navy relative border-t border-b border-white/10">
+      <section id="classes" className="venue-section py-24 bg-primary-navy relative border-t border-b border-white/10">
         <div className="absolute inset-0 bg-radial-gradient from-accent-blue/5 via-transparent to-transparent opacity-50 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
             <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-[0.25em] block">
-              TRAINING VENUE & PRACTICE WINDOWS
+              {language === 'en' ? 'TRAINING VENUE & PRACTICE WINDOWS' : 'TEMPAT LATIHAN & JADWAL KELAS'}
             </span>
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase">
-              CLASSES & VENUE
+              {language === 'en' ? 'CLASSES & VENUE' : 'KELAS & LOKASI'}
             </h2>
-            <p className="text-white/60 text-sm font-sans">
-              All tactical drill modules are coordinated at our premium parquet court with state-of-the-art sports science infrastructure.
+            <p className="venue-section-desc text-white/60 text-sm font-sans">
+              {language === 'en'
+                ? 'All tactical drill modules are coordinated at our premium parquet court with state-of-the-art sports science infrastructure.'
+                : 'Semua modul latihan taktis dikoordinasikan di lapangan parket premium kami dengan infrastruktur ilmu olahraga (sport science) mutakhir.'}
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
             
             {/* Left Column: Interactive Practice Venue Map (70% - 8/12 Columns) */}
-            <div className="lg:col-span-8 flex flex-col justify-between bg-secondary-navy/40 border border-white/10 rounded-3xl overflow-hidden p-6 sm:p-8 shadow-2xl relative min-h-[460px] group glow-border">
+            <div className="venue-card lg:col-span-8 flex flex-col justify-between bg-secondary-navy/40 border border-white/10 rounded-3xl overflow-hidden p-6 sm:p-8 shadow-2xl relative min-h-[460px] group glow-border">
               {/* Slanted Accent-Blue Header */}
               <div className="absolute top-0 left-0 z-20 font-sans">
                 <div 
                   className="bg-accent-blue text-primary-navy font-display font-black text-[10px] sm:text-xs uppercase tracking-wider px-5 py-2"
                   style={{ clipPath: 'polygon(0 0, 88% 0, 100% 100%, 0 100%)' }}
                 >
-                  OFFICIAL PITCH
+                  {language === 'en' ? 'OFFICIAL PITCH' : 'LAPANGAN RESMI'}
                 </div>
               </div>
 
               {/* Top Right Label */}
-              <div className="absolute top-4 right-4 sm:right-8 z-20 flex items-center space-x-2 bg-black/40 px-3 py-1 rounded-full border border-white/5">
+              <div className="venue-active-badge absolute top-4 right-4 sm:right-8 z-20 flex items-center space-x-2 bg-black/40 px-3 py-1 rounded-full border border-white/5">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="font-mono text-[10px] text-emerald-400 font-bold uppercase tracking-wider">ACTIVE COMPLEX</span>
+                <span className="venue-active-text font-mono text-[10px] text-emerald-400 font-bold uppercase tracking-wider">
+                  {language === 'en' ? 'ACTIVE COMPLEX' : 'KOMPLEKS AKTIF'}
+                </span>
               </div>
 
               <div className="space-y-6 flex-grow pt-8">
@@ -767,7 +801,7 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                   <iframe 
                     title="Sentul Sports Center Map Location"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.266228308422!2d106.8436021!3d-6.6138407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c1ce818c3937%3A0xe5a3c63102ef1fd3!2sSentul%20Sports%20Club!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" 
-                    className="absolute inset-0 w-full h-full border-0 grayscale invert contrast-125 hover:grayscale-0 hover:invert-0 transition-all duration-700" 
+                    className="venue-map-iframe absolute inset-0 w-full h-full border-0 grayscale invert contrast-125 hover:grayscale-0 hover:invert-0 transition-all duration-700" 
                     allowFullScreen={true} 
                     loading="lazy" 
                     referrerPolicy="no-referrer-when-downgrade"
@@ -779,11 +813,11 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                 {/* Venue Details */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4">
                   <div className="space-y-1">
-                    <h4 className="font-display font-black text-lg text-white uppercase tracking-tight flex items-center gap-2">
-                      <MapPin size={18} className="text-accent-blue" />
+                    <h4 className="venue-title font-display font-black text-lg text-white uppercase tracking-tight flex items-center gap-2">
+                       <MapPin size={18} className="text-accent-blue" />
                       SENTUL SPORTS CENTER ARENA
                     </h4>
-                    <p className="text-white/60 text-xs sm:text-sm font-sans max-w-xl">
+                    <p className="venue-desc text-white/60 text-xs sm:text-sm font-sans max-w-xl">
                       Jl. Sentul Raya block B-3, Sentul City, Kec. Babakan Madang, Kabupaten Bogor, Jawa Barat 16810, Indonesia.
                     </p>
                   </div>
@@ -791,9 +825,9 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
                     href="https://maps.google.com/?q=Sentul+Sports+Club" 
                     target="_blank" 
                     rel="noreferrer"
-                    className="sm:self-end bg-white/10 hover:bg-accent-blue hover:text-primary-navy text-white font-mono text-[10px] sm:text-xs font-bold tracking-wider px-4 py-2.5 rounded-xl border border-white/10 hover:border-accent-blue/20 transition-all text-center whitespace-nowrap min-h-[40px] cursor-pointer"
+                    className="venue-directions-btn sm:self-end bg-white/10 hover:bg-accent-blue hover:text-primary-navy text-white font-mono text-[10px] sm:text-xs font-bold tracking-wider px-4 py-2.5 rounded-xl border border-white/10 hover:border-accent-blue/20 transition-all text-center whitespace-nowrap min-h-[40px] cursor-pointer"
                   >
-                    GET DIRECTIONS
+                    {language === 'en' ? 'GET DIRECTIONS' : 'PETUNJUK ARAH'}
                   </a>
                 </div>
               </div>
@@ -801,23 +835,25 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
             </div>
 
             {/* Right Column: High-Intensity Schedule (30% - 4/12 Columns) */}
-            <div className="lg:col-span-4 flex flex-col justify-between bg-secondary-navy/40 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative min-h-[460px] group glow-border">
+            <div className="venue-card lg:col-span-4 flex flex-col justify-between bg-secondary-navy/40 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative min-h-[460px] group glow-border">
 
               {/* Title Section */}
               <div className="space-y-4 pt-4">
-                <div className="inline-flex items-center space-x-1.5 bg-accent-blue/15 border border-accent-blue/30 px-2.5 py-1 rounded-md">
+                <div className="venue-sched-header inline-flex items-center space-x-1.5 bg-accent-blue/15 border border-accent-blue/30 px-2.5 py-1 rounded-md">
                   <Calendar size={13} className="text-accent-blue" />
-                  <span className="font-mono text-[9px] font-bold text-accent-blue uppercase tracking-widest">WIB STANDARDS</span>
+                  <span className="font-mono text-[9px] font-bold text-accent-blue uppercase tracking-widest text-[#64B5E6] !text-[#64B5E6]">
+                    {language === 'en' ? 'WIB STANDARDS' : 'STANDAR WIB'}
+                  </span>
                 </div>
                 <div>
-                  <h3 className="font-display font-black text-2xl text-white uppercase tracking-tight leading-none">
-                    WEEKLY PRACTICE
+                  <h3 className="venue-sched-title font-display font-black text-2xl text-white uppercase tracking-tight leading-none">
+                    {language === 'en' ? 'WEEKLY PRACTICE' : 'JADWAL LATIHAN'}
                   </h3>
                   <span className="font-display font-black text-accent-blue text-2xl uppercase tracking-tight block mt-1">
-                    WINDOWS
+                    {language === 'en' ? 'WINDOWS' : 'MINGGUAN'}
                   </span>
-                  <p className="text-white/50 text-[10px] font-mono uppercase tracking-widest mt-1">
-                    Systematic Cognitive Drills
+                  <p className="venue-sched-subtitle text-white/50 text-[10px] font-mono uppercase tracking-widest mt-1">
+                    {language === 'en' ? 'Systematic Cognitive Drills' : 'Latihan Kognitif Sistematis'}
                   </p>
                 </div>
               </div>
@@ -826,50 +862,68 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
               <div className="space-y-4 my-8 flex-grow">
                 
                 {/* Session 1: Monday */}
-                <div className="bg-[#000d21]/50 border border-white/5 rounded-xl p-4 hover:border-accent-blue/20 transition-all relative overflow-hidden group/item">
+                <div className="venue-sched-block bg-[#000d21]/50 border border-white/5 rounded-xl p-4 hover:border-accent-blue/20 transition-all relative overflow-hidden group/item">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-accent-blue/5 rounded-full blur-xl pointer-events-none group-hover/item:bg-accent-blue/10 transition-colors" />
                   <div className="flex justify-between items-center mb-1">
-                    <span className="font-display font-black text-sm text-accent-blue tracking-wide uppercase">MONDAY</span>
-                    <span className="bg-white/5 border border-white/10 font-mono text-[9px] text-white/50 px-2 py-0.5 rounded-full uppercase">Tactical Day</span>
+                    <span className="venue-sched-day font-display font-black text-sm text-accent-blue tracking-wide uppercase">
+                      {language === 'en' ? 'MONDAY' : 'SENIN'}
+                    </span>
+                    <span className="venue-sched-type bg-white/5 border border-white/10 font-mono text-[9px] text-white/50 px-2 py-0.5 rounded-full uppercase">
+                      {language === 'en' ? 'Tactical Day' : 'Hari Taktis'}
+                    </span>
                   </div>
-                  <div className="flex items-center space-x-2 text-white mt-1">
+                  <div className="venue-sched-time flex items-center space-x-2 text-white mt-1">
                     <Clock size={14} className="text-accent-blue/70" />
                     <span className="font-mono text-xs font-bold sm:text-sm">16:00 - 18:00 WIB</span>
                   </div>
-                  <p className="text-white/50 text-[10px] font-sans mt-2">
-                    Focus: Ball mastery, dynamic technical repetition, positional discipline.
+                  <p className="venue-sched-desc text-white/50 text-[10px] font-sans mt-2">
+                    {language === 'en'
+                      ? 'Focus: Ball mastery, dynamic technical repetition, positional discipline.'
+                      : 'Fokus: Penguasaan bola, repetisi teknis dinamis, disiplin posisi.'}
                   </p>
                 </div>
 
                 {/* Session 2: Thursday */}
-                <div className="bg-[#000d21]/50 border border-white/5 rounded-xl p-4 hover:border-accent-blue/20 transition-all relative overflow-hidden group/item">
+                <div className="venue-sched-block bg-[#000d21]/50 border border-white/5 rounded-xl p-4 hover:border-accent-blue/20 transition-all relative overflow-hidden group/item">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-accent-blue/5 rounded-full blur-xl pointer-events-none group-hover/item:bg-accent-blue/10 transition-colors" />
                   <div className="flex justify-between items-center mb-1">
-                    <span className="font-display font-black text-sm text-accent-blue tracking-wide uppercase">THURSDAY</span>
-                    <span className="bg-white/5 border border-white/10 font-mono text-[9px] text-white/50 px-2 py-0.5 rounded-full uppercase">Cognition Day</span>
+                    <span className="venue-sched-day font-display font-black text-sm text-accent-blue tracking-wide uppercase">
+                      {language === 'en' ? 'THURSDAY' : 'KAMIS'}
+                    </span>
+                    <span className="venue-sched-type bg-white/5 border border-white/10 font-mono text-[9px] text-white/50 px-2 py-0.5 rounded-full uppercase">
+                      {language === 'en' ? 'Cognition Day' : 'Hari Kognitif'}
+                    </span>
                   </div>
-                  <div className="flex items-center space-x-2 text-white mt-1">
+                  <div className="venue-sched-time flex items-center space-x-2 text-white mt-1">
                     <Clock size={14} className="text-accent-blue/70" />
                     <span className="font-mono text-xs font-bold sm:text-sm">16:00 - 18:00 WIB</span>
                   </div>
-                  <p className="text-white/50 text-[10px] font-sans mt-2">
-                    Focus: Rapid cognitive decision play, physical explosiveness grids.
+                  <p className="venue-sched-desc text-white/50 text-[10px] font-sans mt-2">
+                    {language === 'en'
+                      ? 'Focus: Rapid cognitive decision play, physical explosiveness grids.'
+                      : 'Fokus: Pengambilan keputusan kognitif cepat, latihan eksplosifitas fisik.'}
                   </p>
                 </div>
 
                 {/* Session 3: Saturday */}
-                <div className="bg-[#000d21]/50 border border-white/5 rounded-xl p-4 hover:border-accent-blue/20 transition-all relative overflow-hidden group/item">
+                <div className="venue-sched-block bg-[#000d21]/50 border border-white/5 rounded-xl p-4 hover:border-accent-blue/20 transition-all relative overflow-hidden group/item">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-accent-blue/5 rounded-full blur-xl pointer-events-none group-hover/item:bg-accent-blue/10 transition-colors" />
                   <div className="flex justify-between items-center mb-1">
-                    <span className="font-display font-black text-sm text-accent-blue tracking-wide uppercase">SATURDAY</span>
-                    <span className="bg-white/5 border border-white/10 font-mono text-[9px] text-white/50 px-2 py-0.5 rounded-full uppercase">Match-Play Day</span>
+                    <span className="venue-sched-day font-display font-black text-sm text-accent-blue tracking-wide uppercase">
+                      {language === 'en' ? 'SATURDAY' : 'SABTU'}
+                    </span>
+                    <span className="venue-sched-type bg-white/5 border border-white/10 font-mono text-[9px] text-white/50 px-2 py-0.5 rounded-full uppercase">
+                      {language === 'en' ? 'Match-Play Day' : 'Hari Pertandingan'}
+                    </span>
                   </div>
-                  <div className="flex items-center space-x-2 text-white mt-1">
+                  <div className="venue-sched-time flex items-center space-x-2 text-white mt-1">
                     <Clock size={14} className="text-accent-blue/70" />
                     <span className="font-mono text-xs font-bold sm:text-sm">08:00 - 10:00 WIB</span>
                   </div>
-                  <p className="text-white/50 text-[10px] font-sans mt-2">
-                    Focus: Tactical split-seconds match execution, physical performance tests.
+                  <p className="venue-sched-desc text-white/50 text-[10px] font-sans mt-2">
+                    {language === 'en'
+                      ? 'Focus: Tactical split-seconds match execution, physical performance tests.'
+                      : 'Fokus: Eksekusi taktis laga sepersekian detik, uji performa fisik.'}
                   </p>
                 </div>
 
@@ -879,9 +933,9 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
               <div className="pt-2">
                 <button 
                   onClick={() => setCurrentPage('registration')}
-                  className="w-full bg-[#031633] border border-white/10 text-white hover:bg-accent-blue hover:text-primary-navy hover:border-accent-blue font-display font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all duration-300 flex items-center justify-between min-h-[44px] cursor-pointer group"
+                  className="venue-booking-btn w-full bg-[#031633] border border-white/10 text-white hover:bg-accent-blue hover:text-primary-navy hover:border-accent-blue font-display font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all duration-300 flex items-center justify-between min-h-[44px] cursor-pointer group"
                 >
-                  <span>RESERVE TRAINING SLOT</span>
+                  <span>{language === 'en' ? 'RESERVE TRAINING SLOT' : 'PESAN SLOT LATIHAN'}</span>
                   <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
                 </button>
               </div>
@@ -900,13 +954,13 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
             <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-widest block">
-              SPORTS SCIENCE TRAINING BLUEPRINT
+              {t('drills.subtitle')}
             </span>
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase">
-              THE 5 PILLARS OF BFA DRILLS
+              {t('drills.title')}
             </h2>
             <p className="text-white/60 text-sm">
-              Our professional training blocks don&apos;t rely on random pick-up matching. Every session is systematically mapped into five fundamental steps of progression.
+              {t('drills.desc')}
             </p>
           </div>
 
@@ -951,29 +1005,28 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-widest block">
-                EXCELLENCE IN CONTESTS
+                {t('record.subtitle')}
               </span>
-              <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase leading-none">
-                BOGOR&apos;S DOMINANT<br />
-                ACADEMY RECORD
+              <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase leading-none text-left">
+                {t('record.title')}
               </h2>
-              <p className="text-white/80 font-sans text-xs sm:text-sm leading-relaxed">
-                Bogor Futsal Academy isn&apos;t just about coordination instruction; we enter competitive situations to verify our player development. Historically, our junior squads consistently rank at top podiums across regional, state, and invitational championships.
+              <p className="text-white/80 font-sans text-xs sm:text-sm leading-relaxed text-left">
+                {t('record.desc')}
               </p>
               
               <div className="space-y-3.5 bg-secondary-navy/60 p-5 rounded-2xl border border-white/10">
-                <div className="flex items-start space-x-3">
+                <div className="flex items-start space-x-3 text-left">
                   <Trophy size={18} className="text-accent-blue shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="font-display font-bold text-white text-sm uppercase">West Java State Youth Cup (U18)</h5>
-                    <p className="text-white/60 text-xs mt-0.5">Consecutive Gold Podiums: 2024, 2025, 2026</p>
+                    <h5 className="font-display font-bold text-white text-sm uppercase">{language === 'en' ? 'West Java State Youth Cup (U18)' : 'Piala Pemuda Jawa Barat (U18)'}</h5>
+                    <p className="text-white/60 text-xs mt-0.5">{language === 'en' ? 'Consecutive Gold Podiums: 2024, 2025, 2026' : 'Podium Emas Beruntun: 2024, 2025, 2026'}</p>
                   </div>
                 </div>
-                <div className="border-t border-white/5 pt-3.5 flex items-start space-x-3">
+                <div className="border-t border-white/5 pt-3.5 flex items-start space-x-3 text-left">
                   <Star size={18} className="text-accent-blue shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="font-display font-bold text-white text-sm uppercase">Regional Junior Cup MVP Selection</h5>
-                    <p className="text-white/60 text-xs mt-0.5">BFA Academy student Raffi Saputra selected as 2025 regional Golden Boot winner</p>
+                    <h5 className="font-display font-bold text-white text-sm uppercase">{t('record.item2_title')}</h5>
+                    <p className="text-white/60 text-xs mt-0.5">{t('record.item2_desc')}</p>
                   </div>
                 </div>
               </div>
@@ -1012,10 +1065,10 @@ export default function Home({ setCurrentPage, sponsors }: HomeProps) {
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
             <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-widest block">
-              TRUSTED BY BOGOR FAMILIES
+              {t('testimonials.title')}
             </span>
             <h2 className="font-display font-black text-3xl sm:text-5xl text-white uppercase">
-              WHAT PARENTS & LEAD ATHLETES SAY
+              {t('testimonials.subtitle')}
             </h2>
           </div>
 

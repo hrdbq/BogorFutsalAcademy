@@ -5,14 +5,19 @@
 
 import { Phone, Mail, MapPin, Instagram, Youtube, Clock, ShieldCheck } from 'lucide-react';
 import logoImg from '../assets/images/bfa-logo.png';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface FooterProps {
   setCurrentPage: (page: string) => void;
   setIsAdminMode: (isAdmin: boolean) => void;
 }
 
-export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) {
+export default function Footer({ 
+  setCurrentPage, 
+  setIsAdminMode
+}: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   const handlePageClick = (pageId: string) => {
     setIsAdminMode(false);
@@ -43,8 +48,8 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
               </div>
             </div>
             
-            <p className="text-white/60 text-xs leading-relaxed font-sans">
-              West Java's premier futsal academy. Developing high-tactical awareness, elite motor skills, and champion character inside active youth athletes.
+            <p className="text-white/60 text-xs leading-relaxed font-sans text-left">
+              {t('footer.desc')}
             </p>
 
             <div className="flex items-center space-x-3 pt-2">
@@ -81,7 +86,7 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
           {/* Nav Shortcut Links */}
           <div className="space-y-4">
             <h4 className="font-display text-sm font-bold uppercase tracking-wider text-accent-blue">
-              Navigation
+              {t('footer.nav')}
             </h4>
             <ul className="space-y-2.5 text-xs text-white/70">
               <li>
@@ -89,7 +94,7 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
                   onClick={() => handlePageClick('home')}
                   className="hover:text-accent-blue hover:underline cursor-pointer min-h-[30px] inline-flex items-center"
                 >
-                  Home Dashboard
+                  {t('nav.home')}
                 </button>
               </li>
               <li>
@@ -97,7 +102,7 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
                   onClick={() => handlePageClick('programs')}
                   className="hover:text-accent-blue hover:underline cursor-pointer min-h-[30px] inline-flex items-center"
                 >
-                  Training Programs
+                  {t('nav.programs')}
                 </button>
               </li>
               <li>
@@ -105,7 +110,7 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
                   onClick={() => handlePageClick('coaches')}
                   className="hover:text-accent-blue hover:underline cursor-pointer min-h-[30px] inline-flex items-center"
                 >
-                  Elite Coaches & Staff
+                  {t('nav.coaches')}
                 </button>
               </li>
               <li>
@@ -113,7 +118,7 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
                   onClick={() => handlePageClick('events')}
                   className="hover:text-accent-blue hover:underline cursor-pointer min-h-[30px] inline-flex items-center"
                 >
-                  Events & Tournaments
+                  {t('nav.events')}
                 </button>
               </li>
               <li>
@@ -121,7 +126,7 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
                   onClick={() => handlePageClick('gallery')}
                   className="hover:text-accent-blue hover:underline cursor-pointer min-h-[30px] inline-flex items-center"
                 >
-                  Media Photo Gallery
+                  {t('nav.gallery')}
                 </button>
               </li>
             </ul>
@@ -130,7 +135,7 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
           {/* Quick Info Categories and Shortcuts */}
           <div className="space-y-4">
             <h4 className="font-display text-sm font-bold uppercase tracking-wider text-accent-blue">
-              Age Categories
+              {t('pathway.subtitle')}
             </h4>
             <ul className="space-y-2.5 text-xs text-white/70">
               <li>
@@ -166,10 +171,10 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
           {/* Core Venue Physical Address Coordinates */}
           <div className="space-y-4">
             <h4 className="font-display text-sm font-bold uppercase tracking-wider text-accent-blue">
-              Academy Venue
+              {t('footer.contact')}
             </h4>
             <ul className="space-y-3 text-xs text-white/70">
-              <li className="flex items-start space-x-2.5">
+              <li className="flex items-start space-x-2.5 text-left">
                 <MapPin size={16} className="text-accent-blue shrink-0 mt-0.5" />
                 <span>
                   <strong>GOR Pajajaran Arena:</strong><br />
@@ -208,8 +213,8 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
 
         {/* End Credits copyright bar */}
         <div className="border-t border-white/5 pt-8 text-center text-[11px] text-white/45 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© {currentYear} Bogor Futsal Academy (BFA). All rights reserved.</p>
-          <div className="flex space-x-6">
+          <p>© {currentYear} Bogor Futsal Academy (BFA). {t('footer.rights')}</p>
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-6 gap-y-3">
             <button 
               onClick={() => handlePageClick('contact')} 
               className="hover:text-white cursor-pointer min-h-[30px]"
@@ -220,7 +225,7 @@ export default function Footer({ setCurrentPage, setIsAdminMode }: FooterProps) 
               onClick={() => setIsAdminMode(true)} 
               className="hover:text-accent-blue text-accent-blue/80 font-bold transition-all cursor-pointer min-h-[30px]"
             >
-              Staff Portal Login
+              {t('footer.login')}
             </button>
           </div>
         </div>

@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Check, User, Phone, Mail, Award, Calendar, DollarSign, Sparkles, HelpCircle, ShieldAlert, Receipt, ChevronDown 
 } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 import { Registration } from '../types';
 
 interface RegistrationProps {
@@ -15,6 +16,7 @@ interface RegistrationProps {
 }
 
 export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps) {
+  const { language, t } = useLanguage();
   const [step, setStep] = useState<number>(1);
   const [formData, setFormData] = useState({
     studentName: '',
@@ -33,78 +35,126 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
   const pricingTapes = [
     {
       id: 'Trial',
-      title: 'Free Trial Session',
+      title: language === 'en' ? 'Free Trial Session' : 'Uji Coba Gratis',
       price: 'IDR 0',
-      period: 'Single Session',
+      period: language === 'en' ? 'Single Session' : 'Satu Sesi',
       accent: false,
-      perks: [
-        'Single 90-minute technical evaluation drill',
-        'Direct progress assessment by AFC coaches',
-        'Complimentary training jersey loan for session',
-        'No administrative sign-up required'
-      ]
+      perks: language === 'en' 
+        ? [
+            'Single 90-minute technical evaluation drill',
+            'Direct progress assessment by AFC coaches',
+            'Complimentary training jersey loan for session',
+            'No administrative sign-up required'
+          ]
+        : [
+            'Satu sesi 90 menit latihan teknik lapangan langsung',
+            'Penilaian kinerja objektif oleh pelatih lisensi AFC',
+            'Peminjaman jersey latihan Bogor Futsal selama sesi',
+            'Bebas biaya pendaftaran administrasi apa pun'
+          ]
     },
     {
       id: 'Monthly',
-      title: 'Standard Monthly',
+      title: language === 'en' ? 'Standard Monthly' : 'Standar Bulanan',
       price: 'IDR 650.000',
-      period: 'per Month',
+      period: language === 'en' ? 'per Month' : 'per Bulan',
       accent: true,
-      perks: [
-        '2 Scheduled training sessions per week',
-        'Official match registration capability',
-        'Direct parent progress reports quarterly',
-        'Physiotherapy consultations under injury'
-      ]
+      perks: language === 'en'
+        ? [
+            '2 Scheduled training sessions per week',
+            'Official match registration capability',
+            'Direct parent progress reports quarterly',
+            'Physiotherapy consultations under injury'
+          ]
+        : [
+            '2 Kali sesi latihan rutin berjadwal setiap minggu',
+            'Hak pendaftaran resmi turnamen/kompetisi BFA',
+            'Laporan rapor berkala perkembangan atlet tiap kuartal',
+            'Dukungan penanganan cedera oleh tim fisioterapi'
+          ]
     },
     {
       id: 'Quarterly',
-      title: 'Elite Quarterly',
+      title: language === 'en' ? 'Elite Quarterly' : 'Triwulan Elite',
       price: 'IDR 1.800.000',
-      period: '3 Months (Save 8%)',
+      period: language === 'en' ? '3 Months (Save 8%)' : '3 Bulan (Hemat 8%)',
       accent: false,
-      perks: [
-        'All Monthly Tier Perks included',
-        'Free official BFA Home Match Player Jersey Kit',
-        'Guaranteed exhibition match placements',
-        'Prioritized academy event enrollments'
-      ]
+      perks: language === 'en'
+        ? [
+            'All Monthly Tier Perks included',
+            'Free official BFA Home Match Player Jersey Kit',
+            'Guaranteed exhibition match placements',
+            'Prioritized academy event enrollments'
+          ]
+        : [
+            'Termasuk seluruh fasilitas keanggotaan paket bulanan',
+            'Gratis 1 Set Jersey Home Resmi Bogor Futsal Academy',
+            'Jaminan penempatan posisi di laga persahabatan/persahabatan',
+            'Prioritas pemesanan jadwal event & sparing khusus'
+          ]
     },
     {
       id: 'Annual',
-      title: 'Champion Annual',
+      title: language === 'en' ? 'Champion Annual' : 'Tahunan Juara',
       price: 'IDR 6.500.000',
-      period: '12 Months (Save 17%)',
+      period: language === 'en' ? '12 Months (Save 17%)' : '12 Bulan (Hemat 17%)',
       accent: false,
-      perks: [
-        'Complete 1-year developmental progression curriculum',
-        'Free Home + Away Jersey Kit + Futsal Team Socks',
-        'Sponsored registration into West Java Gold Trophy',
-        'Bi-weekly physical threshold bio-metrics reports'
-      ]
+      perks: language === 'en'
+        ? [
+            'Complete 1-year developmental progression curriculum',
+            'Free Home + Away Jersey Kit + Futsal Team Socks',
+            'Sponsored registration into West Java Gold Trophy',
+            'Bi-weekly physical threshold bio-metrics reports'
+          ]
+        : [
+            'Akses kurikulum progres komprehensif selama 1 tahun penuh',
+            'Gratis Jersey Home & Away + Tas Sepatu + Kaos Kaki Resmi',
+            'Sponsor pendaftaran resmi turnamen West Java Gold Trophy',
+            'Ulasan statistik biometrik fisik atlet setiap dua minggu'
+          ]
     }
   ];
 
   const faqs = [
     {
-      q: "What equipment must my child bring for their initial trial session?",
-      a: "Your child should wear standard athletic shorts, t-shirt, and clean futsal flat rubber-soled shoes (non-marking). Please bring a reusable water bottle. We will provide training bibs and professional futsal balls. No studded soccer cleats are allowed on GOR Pajajaran's indoor parquet surfaces."
+      q: language === 'en' 
+        ? "What equipment must my child bring for their initial trial session?"
+        : "Perlengkapan apa saja yang harus dibawa anak saya saat sesi uji coba pertama?",
+      a: language === 'en'
+        ? "Your child should wear standard athletic shorts, t-shirt, and clean futsal flat rubber-soled shoes (non-marking). Please bring a reusable water bottle. We will provide training bibs and professional futsal balls. No studded soccer cleats are allowed on GOR Pajajaran's indoor parquet surfaces."
+        : "Anak Anda cukup mengenakan celana pendek olahraga, kaos nyaman, serta sepatu futsal sol karet rata yang bersih (tidak bermarking/meninggalkan tapak). Sediakan botol air minum pribadi. Rompi latihan harian dan bola futsal profesional akan kami fasilitasi. Penggunaan sepatu bola bergigi/pul dilarang keras di atas lapangan parket kayu GOR Pajajaran Sempur."
     },
     {
-      q: "My child has never played futsal or soccer before. Can they enroll?",
-      a: "Absolutely! Our U6-U9 (Fun Futsal Foundation) and U10-U12 classes are structured precisely to welcome beginners. Our head coaches prioritize motor coordination, speed timing, and spatial awareness before introducing complex match pressure."
+      q: language === 'en'
+        ? "My child has never played futsal or soccer before. Can they enroll?"
+        : "Anak saya belum pernah bermain futsal maupun sepak bola sebelumnya. Apakah diperkenankan bergabung?",
+      a: language === 'en'
+        ? "Absolutely! Our U6-U9 (Fun Futsal Foundation) and U10-U12 classes are structured precisely to welcome beginners. Our head coaches prioritize motor coordination, speed timing, and spatial awareness before introducing complex match pressure."
+        : "Sangat boleh! Kelas U6-U9 (Fun Futsal Foundation) dan U10-U12 kami dibentuk khusus ramah bagi anak tanpa pengalaman dasar sekali pun. Para jajaran pelatih mengutamakan pengembangan kelenturan koordinasi motorik, ketangkasan, dan rasa bahagia sebelum beranjak ke kurikulum taktis yang dinamis."
     },
     {
-      q: "How are parents informed about their child's athletic progress?",
-      a: "We perform individual skill assessments and core physical coordinate evaluations quarterly. In our Admin CMS, our team registers active attendance and writes specific progress profiles, which are shared with parents through physical reports or via private email."
+      q: language === 'en'
+        ? "How are parents informed about their child's athletic progress?"
+        : "Bagaimana mekanisme orang tua menerima informasi terkait progres keterampilan sang anak?",
+      a: language === 'en'
+        ? "We perform individual skill assessments and core physical coordinate evaluations quarterly. In our Admin CMS, our team registers active attendance and writes specific progress profiles, which are shared with parents through physical reports or via private email."
+        : "Kami menyusun tinjauan keterampilan personal serta uji kemampuan atlet secara berkala tiap kuartal. Melalui pelaporan Admin CMS, pihak administrator mencatat data kehadiran real-time serta profil evaluasi progres, yang diserahkan dalam bentuk rapor fisik atau email."
     },
     {
-      q: "Is there medical staff present during training?",
-      a: "Yes. Our academy has a dedicated physiotherapist, Dr. Teddy, present during training blocks at GOR Pajajaran Sempur. In addition, all enrolled academy athletes are coordinated under the academy&apos;s primary sports emergency protocols."
+      q: language === 'en'
+        ? "Is there medical staff present during training?"
+        : "Apakah ada petugas medis yang bersiaga selama sesi latihan berlangsung?",
+      a: language === 'en'
+        ? "Yes. Our academy has a dedicated physiotherapist, Dr. Teddy, present during training blocks at GOR Pajajaran Sempur. In addition, all enrolled academy athletes are coordinated under the academy's sports emergency protocols."
+        : "Ya. Akademi menyediakan dukungan penanganan medis pertama dari fisioterapis profesional, dr. Teddy, di lapangan GOR Pajajaran Sempur. Seluruh pendaftaran atlet juga mendapatkan jaminan perlindungan di bawah protokol tanggap cedera olahraga BFA."
     },
     {
-      q: "What is the cancellation or refund policy?",
-      a: "Membership fees are charged at the beginning of each cycle. For quarterly and annual cycles, packages offer steep discounts but are non-refundable after the first thirty days. Trial sessions are 100% free with zero transactional obligations."
+      q: language === 'en'
+        ? "What is the cancellation or refund policy?"
+        : "Bagaimana proses penalti, pembatalan, atau pengembalian biaya yang sudah dibayar?",
+      a: language === 'en'
+        ? "Membership fees are charged at the beginning of each cycle. For quarterly and annual cycles, packages offer steep discounts but are non-refundable after the first thirty days. Trial sessions are 100% free with zero transactional obligations."
+        : "Biaya iuran rutin keanggotaan terpotong otomatis di awal siklus paket yang Anda pilih. Untuk siklus paket tiga bulanan dan tahunan, potongan harga bersifat mengikat dan tidak dapat diuangkan kembali setelah lewat dari waktu 30 hari pertama. Kelas uji coba (trial) dijamin gratis tanpa tagihan tersembunyi apa pun."
     }
   ];
 
@@ -121,7 +171,9 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
   const handleFormFinishSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.studentName || !formData.parentPhone || !formData.parentEmail) {
-      alert("Please ensure Student Name, Parent Phone, and Parent Email are compiled correctly.");
+      alert(language === 'en' 
+        ? "Please ensure Student Name, Parent Phone, and Parent Email are filled out completely." 
+        : "Pastikan Nama Siswa/Atlet, Nomor Telepon Orang Tua, serta Alamat Email diisi dengan benar.");
       return;
     }
 
@@ -144,13 +196,15 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
         <div className="absolute inset-0 opacity-15 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1518063319789-7217e6706b04?auto=format&fit=crop&q=80&w=1200')" }} />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
           <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-[0.25em] block mb-3">
-            SECURE ADMISSION PLATFORM
+            {language === 'en' ? 'SECURE ADMISSION PLATFORM' : 'PORTAL PENDAFTARAN RESMI ACADEMY'}
           </span>
           <h1 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-white uppercase tracking-tight">
-            ACADEMY REGISTRATION & PRICING
+            {language === 'en' ? 'ACADEMY REGISTRATION & PRICING' : 'PENDAFTARAN & BIAYA AKADEMI'}
           </h1>
           <p className="text-white/70 max-w-2xl text-xs sm:text-sm leading-relaxed mt-3">
-            Secure your athlete&apos;s roster registration inside Bogor&apos;s premier professional futsal system. Complete our 3-step dynamic checkout wizard to finalize initial training schedules.
+            {language === 'en' 
+              ? 'Secure your athlete\'s roster registration inside Bogor\'s premier professional futsal system. Complete our 3-step dynamic checkout wizard to finalize initial training schedules.'
+              : 'Daftarkan putra-putri Anda ke dalam akademi futsal profesional Bogor Futsal Academy. Selesaikan 3 langkah mudah pengisian data pendaftaran untuk menentukan jadwal latihan pertama.'}
           </p>
         </div>
       </section>
@@ -160,9 +214,9 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
         <section className="max-w-4xl mx-auto px-4 pt-12">
           <div className="flex items-center justify-between bg-secondary-navy/40 border border-white/5 p-4 rounded-2xl">
             {[
-              { num: 1, label: 'Choose Package' },
-              { num: 2, label: 'Student Info' },
-              { num: 3, label: 'Finalize & Review' }
+              { num: 1, label: language === 'en' ? 'Choose Package' : 'Pilih Paket' },
+              { num: 2, label: language === 'en' ? 'Student Info' : 'Data Siswa/Atlet' },
+              { num: 3, label: language === 'en' ? 'Finalize & Review' : 'Tinjau & Kirim' }
             ].map(st => (
               <div key={st.num} className="flex items-center space-x-2">
                 <span className={`w-8 h-8 rounded-full font-mono text-xs font-bold flex items-center justify-center border transition-all ${
@@ -200,11 +254,13 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
             >
               
               <div className="text-center max-w-2xl mx-auto">
-                <span className="font-mono text-xs font-bold text-[#64B5E6] uppercase tracking-widest block">STEP 1</span>
+                <span className="font-mono text-xs font-bold text-[#64B5E6] uppercase tracking-widest block">{language === 'en' ? 'STEP 1' : 'LANGKAH 1'}</span>
                 <h3 className="font-display font-black text-2xl text-white uppercase mt-1">
-                  CHOOSE ACTIONABLE TRAINING PACKAGES
+                  {language === 'en' ? 'CHOOSE TUITION PACKAGES' : 'PILIH PAKET LATIHAN'}
                 </h3>
-                <p className="text-white/50 text-xs font-mono mt-1">Select the membership duration that best matches your family targets.</p>
+                <p className="text-white/50 text-xs font-mono mt-1">
+                  {language === 'en' ? 'Select the membership duration that best matches your family targets.' : 'Pilih durasi keanggotaan latihan yang sesuai dengan kebutuhan sang atlet.'}
+                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -220,13 +276,13 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
                   >
                     {pkg.accent && (
                       <span className="absolute -top-3.5 right-6 bg-accent-blue text-primary-navy font-mono font-black text-[9px] px-3 py-1 rounded-full uppercase tracking-widest shadow">
-                        Most Popular Group
+                        {language === 'en' ? 'Most Popular' : 'Pilihan Populer'}
                       </span>
                     )}
 
                     <div className="space-y-4">
                       <div>
-                        <span className="text-white/40 font-mono text-[9px] uppercase block">Tuition Tier</span>
+                        <span className="text-white/40 font-mono text-[9px] uppercase block">{language === 'en' ? 'Tuition Tier' : 'Tingkatan Paket'}</span>
                         <h4 className="font-display font-black text-lg text-white uppercase tracking-tight mt-0.5">
                           {pkg.title}
                         </h4>
@@ -260,7 +316,7 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
                           : 'bg-secondary-navy hover:bg-secondary-navy/80 text-white border border-white/15'
                       }`}
                     >
-                      GET {pkg.id} TRIAL NOW ➜
+                      {language === 'en' ? `CHOOSE ${pkg.id} NOW ➜` : `PILIH PAKET ${pkg.id} ➜`}
                     </button>
 
                   </div>
@@ -281,24 +337,26 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
             >
               
               <div className="text-center">
-                <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-widest leading-none">STEP 2</span>
+                <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-widest leading-none">{language === 'en' ? 'STEP 2' : 'LANGKAH 2'}</span>
                 <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase tracking-tight mt-1">
-                  STUDENT & PARENT INFORMATION
+                  {language === 'en' ? 'STUDENT & PARENT INFORMATION' : 'DATA CALON ATLET & ORANG TUA'}
                 </h3>
-                <p className="text-white/50 text-xs font-mono">Fill in vital contact fields. Checked accuracy helps us placement planning.</p>
+                <p className="text-white/50 text-xs font-mono">{language === 'en' ? 'Fill out all registration parameters. Verified details help our squad assignment.' : 'Lengkapi formulir dengan benar. Data yang valid mempermudah penentuan kelas latihan anak.'}</p>
               </div>
 
               <form onSubmit={(e) => { e.preventDefault(); setStep(3); }} className="space-y-4">
                 
                 <div id="form-group-student-name">
-                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">Student Athlete Name <span className="text-red-400">*</span></label>
+                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">
+                    {language === 'en' ? 'Student Athlete Name' : 'Nama Lengkap Calon Atlet'} <span className="text-red-400">*</span>
+                  </label>
                   <div className="relative">
                     <User className="absolute left-3.5 top-3.5 text-accent-blue" size={16} />
                     <input 
                       type="text" 
                       name="studentName"
                       required
-                      placeholder="e.g. Zacky Wijaya"
+                      placeholder={language === 'en' ? 'e.g. Zacky Wijaya' : 'Contoh: Zacky Wijaya'}
                       value={formData.studentName}
                       onChange={handleInputChange}
                       className="w-full pl-11 pr-4 py-3 bg-primary-navy/80 border border-white/15 rounded-xl text-white font-sans text-xs sm:text-sm focus:border-accent-blue focus:outline-none placeholder-white/35 min-h-[44px]"
@@ -307,7 +365,9 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
                 </div>
 
                 <div id="form-group-student-dob">
-                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">Student Birthday (DOB) <span className="text-red-400">*</span></label>
+                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">
+                    {language === 'en' ? 'Student Birthday (DOB)' : 'Tanggal Lahir Atlet'} <span className="text-red-400">*</span>
+                  </label>
                   <div className="relative">
                     <Calendar className="absolute left-3.5 top-3.5 text-accent-blue" size={16} />
                     <input 
@@ -323,12 +383,14 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div id="form-group-parent-name">
-                    <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">Parent/Guardian Name <span className="text-red-400">*</span></label>
+                    <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">
+                      {language === 'en' ? 'Parent/Guardian Name' : 'Nama Orang Tua/Wali'} <span className="text-red-400">*</span>
+                    </label>
                     <input 
                       type="text" 
                       name="parentName"
                       required
-                      placeholder="e.g. Tomi Wijaya"
+                      placeholder={language === 'en' ? 'e.g. Tomi Wijaya' : 'Contoh: Tomi Wijaya'}
                       value={formData.parentName}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 bg-primary-navy/80 border border-white/15 rounded-xl text-white font-sans text-xs sm:text-sm focus:border-accent-blue focus:outline-none placeholder-white/35 min-h-[44px]"
@@ -336,7 +398,9 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
                   </div>
 
                   <div id="form-group-age-cat">
-                    <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">Squad Age Placement</label>
+                    <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">
+                      {language === 'en' ? 'Squad Age Placement' : 'Penempatan Umur Regu'}
+                    </label>
                     <select 
                       name="ageCategory"
                       value={formData.ageCategory}
@@ -353,7 +417,9 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
                 </div>
 
                 <div id="form-group-parent-phone">
-                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">Parent Phone / Whatsapp <span className="text-red-400">*</span></label>
+                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">
+                    {language === 'en' ? 'Parent Phone / Whatsapp' : 'No. Telepon / WhatsApp Orang Tua'} <span className="text-red-400">*</span>
+                  </label>
                   <div className="relative">
                     <Phone className="absolute left-3.5 top-3.5 text-accent-blue" size={16} />
                     <input 
@@ -369,7 +435,9 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
                 </div>
 
                 <div id="form-group-parent-email">
-                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">Parent Active Email <span className="text-red-400">*</span></label>
+                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">
+                    {language === 'en' ? 'Parent Active Email' : 'Email Aktif Orang Tua'} <span className="text-red-400">*</span>
+                  </label>
                   <div className="relative">
                     <Mail className="absolute left-3.5 top-3.5 text-accent-blue" size={16} />
                     <input 
@@ -390,14 +458,14 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
                     onClick={() => setStep(1)}
                     className="px-6 py-3 bg-transparent border border-white/10 hover:bg-white/5 text-white/70 hover:text-white rounded-xl text-xs font-bold uppercase transition-all min-h-[44px] cursor-pointer"
                   >
-                    Back
+                    {language === 'en' ? 'Back' : 'Kembali'}
                   </button>
 
                   <button
                     type="submit"
                     className="flex-grow py-3.5 bg-accent-blue hover:bg-accent-blue/90 text-primary-navy font-display font-black uppercase text-xs tracking-widest rounded-xl transition-all min-h-[44px] cursor-pointer"
                   >
-                    Continue to Review ➜
+                    {language === 'en' ? 'Continue to Review ➜' : 'Lanjut ke Tinjauan ➜'}
                   </button>
                 </div>
 
@@ -417,42 +485,42 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
             >
               
               <div className="text-center">
-                <span className="font-mono text-xs font-bold text-[#64B5E6] uppercase tracking-widest leading-none">STEP 3</span>
-                <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase mt-1">
-                  CONFIRM SQUAD ADMISSION DEMANDS
+                <span className="font-mono text-xs font-bold text-[#64B5E6] uppercase tracking-widest block leading-none">{language === 'en' ? 'STEP 3' : 'LANGKAH 3'}</span>
+                <h3 className="font-display font-black text-1xl sm:text-2xl text-white uppercase mt-1">
+                  {language === 'en' ? 'CONFIRM SQUAD ADMISSION DETAILS' : 'KONFIRMASI DETAIL PENDAFTARAN'}
                 </h3>
-                <p className="text-white/50 text-xs font-mono">Verify inputs are properly compiled before issuing secure registration.</p>
+                <p className="text-white/50 text-xs font-mono">{language === 'en' ? 'Verify inputs are properly compiled before issuing secure registration.' : 'Tinjau kembali data calon atlet sebelum melakukan pengiriman formulir pendaftaran.'}</p>
               </div>
 
               {/* Review card */}
               <div className="p-5 bg-primary-navy/60 border border-white/5 rounded-2xl space-y-4">
                 <h4 className="font-display font-extrabold text-sm text-accent-blue uppercase tracking-wider pb-2 border-b border-white/5">
-                  Admission Metadata Summary
+                  {language === 'en' ? 'Admission Metadata Summary' : 'Ringkasan Informasi Pendaftaran'}
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   <div>
-                    <span className="text-white/40 font-mono text-[9px] uppercase block">Athlete Student Name</span>
+                    <span className="text-white/40 font-mono text-[9px] uppercase block">{language === 'en' ? 'Athlete Student Name' : 'Nama Lengkap Calon Atlet'}</span>
                     <span className="text-white font-bold block mt-0.5">{formData.studentName}</span>
                   </div>
                   <div>
-                    <span className="text-white/40 font-mono text-[9px] uppercase block">Date of Birth (DOB)</span>
+                    <span className="text-white/40 font-mono text-[9px] uppercase block">{language === 'en' ? 'Date of Birth (DOB)' : 'Tanggal Lahir Atlet'}</span>
                     <span className="text-white block mt-0.5">{formData.dob}</span>
                   </div>
                   <div>
-                    <span className="text-white/40 font-mono text-[9px] uppercase block">Parent / Guardian Name</span>
+                    <span className="text-white/40 font-mono text-[9px] uppercase block">{language === 'en' ? 'Parent / Guardian Name' : 'Nama Orang Tua/Wali'}</span>
                     <span className="text-white block mt-0.5">{formData.parentName}</span>
                   </div>
                   <div>
-                    <span className="text-white/40 font-mono text-[9px] uppercase block">Contact Coordinates</span>
+                    <span className="text-white/40 font-mono text-[9px] uppercase block">{language === 'en' ? 'Contact Info' : 'Informasi Kontak'}</span>
                     <span className="text-white/80 block mt-0.5 text-ellipsis overflow-hidden">{formData.parentPhone} • {formData.parentEmail}</span>
                   </div>
                   <div>
-                    <span className="text-white/40 font-mono text-[9px] uppercase block">Assigned Squad Level</span>
+                    <span className="text-white/40 font-mono text-[9px] uppercase block">{language === 'en' ? 'Assigned Squad Level' : 'Tingkat Regu Latihan'}</span>
                     <span className="text-accent-blue font-bold font-display block mt-0.5 uppercase">{formData.ageCategory}</span>
                   </div>
                   <div>
-                    <span className="text-white/40 font-mono text-[9px] uppercase block">Target Billing Cycle</span>
+                    <span className="text-white/40 font-mono text-[9px] uppercase block">{language === 'en' ? 'Target Billing Cycle' : 'Siklus Pembayaran Terpilih'}</span>
                     <span className="text-green-400 font-bold block mt-0.5 uppercase">{currentPackageInfo.title} ({currentPackageInfo.price})</span>
                   </div>
                 </div>
@@ -462,9 +530,13 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
               <div className="bg-gradient-to-r from-accent-blue/10 to-transparent p-4 sm:p-5 rounded-xl border border-accent-blue/20 flex gap-3">
                 <Sparkles size={20} className="text-accent-blue shrink-0 mt-0.5" />
                 <div className="space-y-1">
-                  <span className="font-mono text-[10px] font-black text-accent-blue uppercase tracking-wider block leading-none">SIMULATED ZERO TRANSFER PROTOCOL</span>
+                  <span className="font-mono text-[10px] font-black text-accent-blue uppercase tracking-wider block leading-none">
+                    {language === 'en' ? 'SIMULATED ZERO TRANSFER PROTOCOL' : 'PROTOKOL SIMULASI BEBAS BIAYA'}
+                  </span>
                   <p className="text-white/70 text-[11px] leading-relaxed font-sans">
-                    Because this operates inside the **AI Studio Interactive Developer Sandbox**, clicking &ldquo;Finalize&rdquo; will immediately compile a real registration code and save it directly. No actual credit card transactions will occur. You are completely safe.
+                    {language === 'en'
+                      ? 'Because this operates inside the **AI Studio Interactive Developer Sandbox**, clicking "Finalize" will immediately generate a real registration code and save it directly. No actual transactional obligations will occur.'
+                      : 'Karena website ini berjalan di dalam **AI Studio Interactive Developer Sandbox**, mengeklik tombol di bawah akan langsung menghasilkan kode registrasi asli dan menyimpannya di browser. Tidak ada tagihan atau pembayaran nyata yang ditagihkan kepada Anda.'}
                   </p>
                 </div>
               </div>
@@ -475,14 +547,14 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
                   onClick={() => setStep(2)}
                   className="px-6 py-3 bg-transparent border border-white/10 hover:bg-white/5 text-white/70 hover:text-white rounded-xl text-xs font-bold uppercase transition-all min-h-[44px] cursor-pointer"
                 >
-                  Edit Information
+                  {language === 'en' ? 'Edit Information' : 'Ubah Informasi'}
                 </button>
 
                 <button
                   onClick={handleFormFinishSubmit}
                   className="flex-grow py-3.5 bg-accent-blue hover:bg-accent-blue/90 text-primary-navy font-display font-black uppercase text-xs tracking-wider rounded-xl transition-all shadow-lg shadow-accent-blue/20 min-h-[44px] cursor-pointer"
                 >
-                  FINALIZE RESERVATION ➜
+                  {language === 'en' ? 'FINALIZE RESERVATION ➜' : 'KIRIM PENDAFTARAN SEKARANG ➜'}
                 </button>
               </div>
 
@@ -504,31 +576,56 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
               </div>
 
               <div className="space-y-2">
-                <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-[0.2em] block leading-none">RESERVATION SECURED</span>
+                <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-[0.2em] block leading-none">
+                  {language === 'en' ? 'RESERVATION SECURED' : 'RESERVASI TELAH DIKONFIRMASI'}
+                </span>
                 <h3 className="font-display font-black text-2xl sm:text-3xl text-white uppercase tracking-tight">
-                  WELCOME TO THE ACADEMY!
+                  {language === 'en' ? 'WELCOME TO THE ACADEMY!' : 'SELAMAT BERGABUNG DI AKADEMI!'}
                 </h3>
                 <p className="text-white/60 text-xs font-mono">
-                  Receipt Code: <strong className="text-white font-bold">{generatedRef}</strong>
+                  {language === 'en' ? 'Receipt Code' : 'Kode Tanda Terima'}: <strong className="text-white font-bold">{generatedRef}</strong>
                 </p>
               </div>
 
               {/* simulated receipt */}
               <div className="p-5 bg-black/60 border border-white/10 rounded-2xl text-left text-xs space-y-3.5">
                 <span className="font-mono text-[9px] text-[#64B5E6] font-bold uppercase block leading-none tracking-widest border-b border-white/5 pb-2">
-                  OFFICIAL ADMISSION RECEIPT
+                  {language === 'en' ? 'OFFICIAL ADMISSION RECEIPT' : 'BUKTI PENDAFTARAN RESMI'}
                 </span>
 
                 <div className="space-y-1.5 font-mono text-white/80">
-                  <p className="flex justify-between"><span>Registrant Status:</span> <span className="text-yellow-400 font-bold uppercase">PENDING FIRST SESSION</span></p>
-                  <p className="flex justify-between"><span>Student Name:</span> <span className="text-white font-bold">{formData.studentName}</span></p>
-                  <p className="flex justify-between"><span>Age squad:</span> <span className="text-accent-blue font-bold uppercase">{formData.ageCategory}</span></p>
-                  <p className="flex justify-between"><span>Billing cycle:</span> <span className="text-green-400 font-bold uppercase">{formData.packageType}</span></p>
-                  <p className="flex justify-between"><span>Payment Indicator:</span> <span className="text-green-400 font-black">UNPAID (Pending Trial)</span></p>
+                  <p className="flex justify-between">
+                    <span>{language === 'en' ? 'Registrant Status:' : 'Status Pendaftar:'}</span> 
+                    <span className="text-yellow-400 font-bold uppercase">{language === 'en' ? 'PENDING FIRST SESSION' : 'MENUNGGU SESI PERTAMA'}</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span>{language === 'en' ? 'Student Name:' : 'Nama Atlet:'}</span> 
+                    <span className="text-white font-bold">{formData.studentName}</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span>{language === 'en' ? 'Age Squad:' : 'Kategori Regu:'}</span> 
+                    <span className="text-accent-blue font-bold uppercase">{formData.ageCategory}</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span>{language === 'en' ? 'Billing Cycle:' : 'Paket Biaya:'}</span> 
+                    <span className="text-green-400 font-bold uppercase">{formData.packageType}</span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span>{language === 'en' ? 'Payment Status:' : 'Status Pembayaran:'}</span> 
+                    <span className="text-green-400 font-black">{language === 'en' ? 'UNPAID (Pending Trial)' : 'BELUM DIBAYAR (Trial)'}</span>
+                  </p>
                 </div>
 
                 <div className="border-t border-white/5 pt-3.5 text-[11px] text-white/55 font-sans leading-relaxed">
-                  <strong>Reporting Instructions:</strong> Please report to <span className="text-white text-semibold">GOR Pajajaran Arena Sempur Office Pitch C</span> fifteen minutes prior to the scheduled training window of your squad. Present this code (<strong>{generatedRef}</strong>) to Coach Siti or Manager Teddy to receive your complimentary loan pack.
+                  {language === 'en' ? (
+                    <>
+                      <strong>Reporting Instructions:</strong> Please report to <span className="text-white font-semibold">GOR Pajajaran Arena Sempur Pitch C</span> fifteen minutes prior to the scheduled training window of your squad. Present this code (<strong>{generatedRef}</strong>) to Coach Siti or Manager Teddy to receive your complimentary loan pack.
+                    </>
+                  ) : (
+                    <>
+                      <strong>Instruksi Kedatangan:</strong> Datanglah ke <span className="text-white font-semibold">Ruang Pengelola GOR Pajajaran Arena Sempur Lapangan C</span> lima belas menit sebelum jadwal latihan regu dimulai. Tunjukkan kode referensi pendaftaran ini (<strong>{generatedRef}</strong>) kepada Coach Siti atau Manager Teddy untuk mengambil rompi trial serta paket gratis Anda.
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -549,7 +646,7 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
                   }}
                   className="px-4 py-3 bg-transparent border border-white/10 hover:bg-white/5 text-white/80 hover:text-white rounded-xl text-xs font-bold uppercase transition-all min-h-[44px] cursor-pointer"
                 >
-                  Register Another Athlete
+                  {language === 'en' ? 'Register Another Athlete' : 'Daftarkan Atlet Lain'}
                 </button>
 
                 <button
@@ -565,7 +662,7 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
                   }}
                   className="flex-grow py-3 bg-accent-blue hover:bg-accent-blue/90 text-primary-navy font-display font-black uppercase text-xs tracking-widest rounded-xl transition-all min-h-[44px] cursor-pointer"
                 >
-                  View Active Match Dates ➜
+                  {language === 'en' ? 'View Active Match Dates ➜' : 'Lihat Jadwal Tanding Aktif ➜'}
                 </button>
               </div>
 
@@ -582,9 +679,11 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
             <HelpCircle size={36} className="text-[#64B5E6] mx-auto" />
             <h2 className="font-display font-black text-2xl sm:text-3.5xl text-white uppercase tracking-tight">
-              FREQUENTLY ASKED QUESTIONS
+              {language === 'en' ? 'FREQUENTLY ASKED QUESTIONS' : 'PERTANYAAN YANG SERING DIAJUKAN (FAQ)'}
             </h2>
-            <p className="text-white/60 text-xs font-mono">Answers to popular questions from sports parents.</p>
+            <p className="text-white/60 text-xs font-mono">
+              {language === 'en' ? 'Answers to popular questions from sports parents.' : 'Informasi dan panduan penting seputar proses latihan anak.'}
+            </p>
           </div>
 
           <div className="space-y-4">
@@ -601,7 +700,7 @@ export default function RegistrationPage({ onRegisterSubmit }: RegistrationProps
                     onClick={() => setActiveFaq(isOpen ? null : index)}
                     className="w-full text-left p-5 flex justify-between items-center text-white hover:text-[#64B5E6] transition-all min-h-[50px] cursor-pointer"
                   >
-                    <span className="font-display font-bold text-xs sm:text-sm uppercase tracking-wide leading-tight">
+                    <span className="font-display font-bold text-xs sm:text-sm uppercase tracking-wide leading-tight font-black">
                       {faq.q}
                     </span>
                     <ChevronDown 

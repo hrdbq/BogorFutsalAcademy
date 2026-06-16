@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Phone, Mail, MapPin, Send, HelpCircle, ShieldCheck, Check, MessageSquare 
 } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 import { ContactInquiry } from '../types';
 
 interface ContactProps {
@@ -15,6 +16,7 @@ interface ContactProps {
 }
 
 export default function Contact({ onInquirySubmit }: ContactProps) {
+  const { language, t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,7 +35,7 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.message) {
-      alert("Please compile all mandatory fields.");
+      alert(language === 'en' ? "Please fill in all required fields." : "Silakan lengkapi semua kolom wajib.");
       return;
     }
 
@@ -60,13 +62,13 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
         <div className="absolute inset-0 opacity-15 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=1200')" }} />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
           <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-[0.25em] block mb-3">
-            TECHNICAL SUPPORT DESK DIRECTORY
+            {t('contact.subtitle')}
           </span>
           <h1 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-white uppercase tracking-tight">
-            CONTACT INQUIRIES
+            {t('contact.title')}
           </h1>
           <p className="text-white/70 max-w-2xl text-xs sm:text-sm leading-relaxed mt-3">
-            Have questions regarding training fees, age squad transfers, or trial jersey kits? Get in touch with our administrative desk or visit GOR Pajajaran Arena directly in Bogor.
+            {t('contact.desc')}
           </p>
         </div>
       </section>
@@ -79,21 +81,25 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
           <div className="lg:col-span-7 bg-[#000d21]/60 border border-white/10 rounded-3xl p-6 sm:p-10 space-y-6">
             
             <div className="space-y-1">
-              <span className="font-mono text-[10px] font-bold text-accent-blue uppercase tracking-widest block leading-none">SUBMIT DIRECT CASE</span>
+              <span className="font-mono text-[10px] font-bold text-accent-blue uppercase tracking-widest block leading-none">
+                {language === 'en' ? 'SUBMIT DIRECT INQUIRY' : 'HUBUNGI KAMI LANGSUNG'}
+              </span>
               <h3 className="font-display font-black text-xl sm:text-2xl text-white uppercase mt-1">
-                ACADEMY COMMUNICATIONS FORM
+                {t('contact.form_title')}
               </h3>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               
               <div id="contact-group-name">
-                <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">Your Human Name <span className="text-red-400">*</span></label>
+                <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">
+                  {language === 'en' ? 'Your Full Name' : 'Nama Lengkap Anda'} <span className="text-red-400">*</span>
+                </label>
                 <input 
                   type="text"
                   name="name"
                   required
-                  placeholder="e.g. Hadi Wijatno"
+                  placeholder={language === 'en' ? "e.g. Hadi Wijatno" : "contoh: Hadi Wijatno"}
                   value={formData.name}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 bg-primary-navy/80 border border-white/15 rounded-xl text-white text-xs sm:text-sm focus:border-accent-blue focus:outline-none placeholder-white/30 min-h-[44px]"
@@ -102,7 +108,9 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div id="contact-group-email">
-                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">Active Email</label>
+                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">
+                    {language === 'en' ? 'Email Address' : 'Alamat Email'}
+                  </label>
                   <input 
                     type="email"
                     name="email"
@@ -114,12 +122,14 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
                 </div>
 
                 <div id="contact-group-phone">
-                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">Phone / WhatsApp <span className="text-red-400">*</span></label>
+                  <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">
+                    {language === 'en' ? 'Phone / WhatsApp' : 'Nomor Telepon / WhatsApp'} <span className="text-red-400">*</span>
+                  </label>
                   <input 
                     type="tel"
                     name="phone"
                     required
-                    placeholder="e.g. +62 811-7788-9900"
+                    placeholder="e.g. +62 812-3456-7890"
                     value={formData.phone}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 bg-primary-navy/80 border border-white/15 rounded-xl text-white text-xs sm:text-sm focus:border-accent-blue focus:outline-none placeholder-white/30 min-h-[44px]"
@@ -128,29 +138,43 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
               </div>
 
               <div id="contact-group-subject">
-                <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">Inquiry Subject Theme</label>
+                <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">
+                  {language === 'en' ? 'Inquiry Subject Topic' : 'Perihal / Subjek Pertanyaan'}
+                </label>
                 <select 
                   name="subject"
                   value={formData.subject}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 bg-primary-navy/80 border border-white/15 rounded-xl text-white text-xs sm:text-sm focus:border-accent-blue focus:outline-none min-h-[44px]"
+                  className="w-full px-4 py-3 bg-primary-navy/80 border border-white/15 rounded-xl text-white font-sans text-xs sm:text-sm focus:border-accent-blue focus:outline-none min-h-[44px]"
                 >
-                  <option value="">-- Choose Subject category --</option>
-                  <option value="U6-U9 Trial Class Reservation">U6-U9 Trial Class Reservation</option>
-                  <option value="U10-U15 Advanced Academy Placement">U10-U15 Advanced Academy Placement</option>
-                  <option value="Corporate friendly Matches Selection">Corporate Friendly Matches Selection</option>
-                  <option value="Invoice & Billing Queries">Invoice & Billing Queries</option>
-                  <option value="General Sponsorship Collaboration">General Sponsorship Collaboration</option>
+                  <option value="">{language === 'en' ? '-- Choose Subject category --' : '-- Pilih Kategori Subjek --'}</option>
+                  <option value="U6-U9 Trial Class Reservation">
+                    {language === 'en' ? 'U6-U9 Trial Class Reservation' : 'Reservasi Kelas Uji Coba U6-U9'}
+                  </option>
+                  <option value="U10-U15 Advanced Academy Placement">
+                    {language === 'en' ? 'U10-U15 Advanced Academy Placement' : 'Penempatan Akademi Tingkat Lanjut U10-U15'}
+                  </option>
+                  <option value="Corporate friendly Matches Selection">
+                    {language === 'en' ? 'Corporate Friendly Matches Selection' : 'Pertandingan Persahabatan Perusahaan / Instansi'}
+                  </option>
+                  <option value="Invoice & Billing Queries">
+                    {language === 'en' ? 'Invoice & Billing Queries' : 'Pertanyaan Tagihan & Invoice'}
+                  </option>
+                  <option value="General Sponsorship Collaboration">
+                    {language === 'en' ? 'General Sponsorship Collaboration' : 'Kolaborasi & Kemitraan Sponsor'}
+                  </option>
                 </select>
               </div>
 
               <div id="contact-group-message">
-                <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">Detailed Message <span className="text-red-400">*</span></label>
+                <label className="text-white/60 font-mono text-[10px] uppercase block mb-1">
+                  {language === 'en' ? 'Detailed Message' : 'Isi Pesan Secara Rinci'} <span className="text-red-400">*</span>
+                </label>
                 <textarea 
                   name="message"
                   required
                   rows={5}
-                  placeholder="Tell us about your athlete's coordinate records or target developmental questions..."
+                  placeholder={language === 'en' ? "Tell us about your athlete's coordinate records or target developmental questions..." : "Tuliskan pertanyaan Anda mengenai program latihan atau perkembangan anak Anda..."}
                   value={formData.message}
                   onChange={handleInputChange}
                   className="w-full px-4 py-3 bg-primary-navy/80 border border-white/15 rounded-xl text-white text-xs sm:text-sm focus:border-accent-blue focus:outline-none placeholder-white/30 resize-none"
@@ -162,7 +186,7 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
                 className="w-full py-4 bg-accent-blue hover:bg-accent-blue/90 text-primary-navy font-display font-black uppercase text-xs tracking-widest rounded-xl transition-all flex items-center justify-center space-x-2 shadow-lg shadow-accent-blue/20 min-h-[48px] cursor-pointer"
               >
                 <Send size={15} />
-                <span>SUBMIT SECURE CASE FILE</span>
+                <span>{language === 'en' ? 'SUBMIT INQUIRY FORM' : 'KIRIM FORMULIR REKAP'}</span>
               </button>
 
               <AnimatePresence>
@@ -174,7 +198,7 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
                     className="p-4 bg-green-500/10 border border-green-500/30 rounded-xl flex items-center space-x-2.5 text-xs text-green-400 font-mono"
                   >
                     <Check size={16} />
-                    <span>Inquiry logged successfully! Staff responds within twenty four hours. Check Admin CMS.</span>
+                    <span>{t('contact.success')}</span>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -189,7 +213,7 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
             {/* Direct click directories */}
             <div className="bg-secondary-navy/30 border border-white/10 rounded-3xl p-6 space-y-6">
               <h4 className="font-display font-black text-sm text-white uppercase tracking-wider">
-                Support desk direct channels
+                {language === 'en' ? 'Support desk direct channels' : 'Saluran kontak langsung kami'}
               </h4>
               
               <div className="space-y-4 text-xs">
@@ -215,7 +239,7 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
                 >
                   <Mail className="text-accent-blue mt-0.5 shrink-0" size={18} />
                   <div>
-                    <span className="font-display font-black text-xs text-white block uppercase">General Administration Email</span>
+                    <span className="font-display font-black text-xs text-white block uppercase">{language === 'en' ? 'General Administration Email' : 'Email Kontak Admin Umum'}</span>
                     <span className="text-[10px] text-white/50 font-mono block mt-0.5">info@bogorfutsal.id</span>
                   </div>
                 </a>
@@ -224,9 +248,9 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
                 <div className="flex items-start space-x-3.5 p-3 rounded-xl bg-primary-navy/55 border border-white/5">
                   <MapPin className="text-accent-blue mt-0.5 shrink-0" size={18} />
                   <div>
-                    <span className="font-display font-black text-xs text-white block uppercase">Physical HQ Headquarters</span>
+                    <span className="font-display font-black text-xs text-white block uppercase">{language === 'en' ? 'Physical HQ Headquarters' : 'Markas Besar / Kantor Admin'}</span>
                     <p className="text-[10px] text-white/60 leading-relaxed font-sans mt-0.5">
-                      GOR Pajajaran, Jl. Pemuda No.15, Sempur, Tanah Sareal, Kota Bogor 16161
+                      {t('footer.address')}
                     </p>
                   </div>
                 </div>
@@ -238,7 +262,7 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
             <div className="bg-[#000d21]/60 border border-white/10 rounded-3xl p-6 space-y-4">
               <div className="flex items-center justify-between">
                 <span className="font-mono text-[9px] text-[#64B5E6] uppercase font-black tracking-widest pb-1">
-                  OFFICIAL COORDINATES VIEWPORTS
+                  {language === 'en' ? 'OFFICIAL LOCATION COORDINATES' : 'KOORDINAT RESMI KANTOR'}
                 </span>
                 <span className="flex h-2 w-2 rounded-full bg-green-500 animate-ping" />
               </div>
@@ -268,14 +292,14 @@ export default function Contact({ onInquirySubmit }: ContactProps) {
                     rel="noreferrer"
                     className="mt-2 inline-block px-4 py-1.5 bg-[#082C5A] hover:bg-accent-blue hover:text-primary-navy border border-white/10 rounded-lg text-[10px] font-mono tracking-wide uppercase transition-all min-h-[30px] cursor-pointer"
                   >
-                    Open in Google Maps Direct
+                    {language === 'en' ? 'Open in Google Maps Direct' : 'Buka di Google Maps'}
                   </a>
                 </div>
               </div>
 
               <div className="flex items-center space-x-2 text-[10px] font-mono text-white/40">
                 <ShieldCheck size={14} className="text-accent-blue shrink-0" />
-                <span>Complies with Indonesian Youth Sports League coordinates.</span>
+                <span>{language === 'en' ? 'Complies with Indonesian Youth Sports League coordinates.' : 'Sesuai dengan standarisasi koordinat resmi kepemudaan.'}</span>
               </div>
             </div>
 

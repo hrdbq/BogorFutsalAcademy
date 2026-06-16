@@ -4,6 +4,8 @@
  */
 
 import { useState, useEffect } from 'react';
+import { Sun, Moon } from 'lucide-react';
+import { motion } from 'motion/react';
 
 // Import Pages
 import Home from './pages/Home';
@@ -31,6 +33,22 @@ import {
 
 export default function App() {
   
+  // Theme state selector
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    const saved = localStorage.getItem('bfa_theme');
+    return (saved === 'dark' || saved === 'light') ? saved : 'dark';
+  });
+
+  // Automatically apply theme class to document body
+  useEffect(() => {
+    if (theme === 'light') {
+      document.body.classList.add('light-theme');
+    } else {
+      document.body.classList.remove('light-theme');
+    }
+    localStorage.setItem('bfa_theme', theme);
+  }, [theme]);
+
   // Hash route detector
   const [currentHash, setCurrentHash] = useState<string>(window.location.hash || '#home');
   const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
@@ -216,7 +234,57 @@ export default function App() {
         </main>
 
         {/* Editorial footer (Hidden during admin mode to prevent cluttering CMS space) */}
-        {!isAdminMode && <Footer setCurrentPage={setCurrentPage} setIsAdminMode={setIsAdminMode} />}
+        {!isAdminMode && (
+          <Footer 
+            setCurrentPage={setCurrentPage} 
+            setIsAdminMode={setIsAdminMode} 
+          />
+        )}
+      </div>
+
+      {/* Elegant Floating Theme Toggle */}
+      <div className={`fixed bottom-6 right-6 z-50 flex items-center p-1 rounded-full border transition-all duration-300 shadow-2xl ${
+        theme === 'light' 
+          ? 'bg-white/95 border-slate-200/80 text-[#011B41] shadow-slate-400/20' 
+          : 'bg-[#000d21]/95 border-white/10 text-white shadow-black/60'
+      }`}>
+        {/* Dark Mode Button */}
+        <button
+          type="button"
+          onClick={() => setTheme('dark')}
+          className={`p-2.5 rounded-full transition-all duration-300 relative cursor-pointer group flex items-center justify-center ${
+            theme === 'dark' ? 'text-accent-blue scale-110' : 'text-slate-400 hover:text-slate-200 scale-90'
+          }`}
+          title="Dark Mode"
+        >
+          {theme === 'dark' && (
+            <motion.div 
+              layoutId="floatingThemeActiveBg"
+              className="absolute inset-0 bg-accent-blue/15 border border-accent-blue/30 rounded-full"
+              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+            />
+          )}
+          <Moon size={18} className="relative z-10" />
+        </button>
+
+        {/* Light Mode Button */}
+        <button
+          type="button"
+          onClick={() => setTheme('light')}
+          className={`p-2.5 rounded-full transition-all duration-300 relative cursor-pointer group flex items-center justify-center ${
+            theme === 'light' ? 'text-[#0284C7] scale-110' : 'text-slate-500 hover:text-slate-300 scale-90'
+          }`}
+          title="Light Mode"
+        >
+          {theme === 'light' && (
+            <motion.div 
+              layoutId="floatingThemeActiveBg"
+              className="absolute inset-0 bg-sky-500/15 border border-sky-500/30 rounded-full"
+              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+            />
+          )}
+          <Sun size={18} className="relative z-10" />
+        </button>
       </div>
 
     </div>

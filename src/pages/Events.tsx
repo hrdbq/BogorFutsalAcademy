@@ -9,6 +9,7 @@ import {
   Calendar, MapPin, Trophy, ShieldAlert, BadgeInfo, Users, Award, ChevronRight, ChevronLeft, CheckCircle 
 } from 'lucide-react';
 import { AcademyEvent } from '../types';
+import { useLanguage } from '../contexts/LanguageContext';
 
 import kidsPathwayImg from '../assets/images/kids_pathway_player_1781504530272.jpg';
 import juniorPathwayImg from '../assets/images/junior_pathway_player_1781504547865.jpg';
@@ -20,44 +21,91 @@ interface EventsProps {
   setCurrentPage: (page: string) => void;
 }
 
+function getTranslatedEvent(ev: AcademyEvent, language: 'en' | 'id'): AcademyEvent {
+  if (ev.id === 'ev1') {
+    return {
+      ...ev,
+      title: language === 'en' ? 'Bogor Youth Championships' : 'Kejuaraan Futsal Remaja Bogor',
+      location: language === 'en' ? 'GOR Pajajaran Arena Sempur' : 'GOR Pajajaran Arena Sempur',
+      details: language === 'en' 
+        ? 'Our Elite U15 squad fights for the ultimate municipal futsal prestige. General attendance is wide open.' 
+        : 'Skuat Elite U15 kami bersaing memperebutkan takhta kasta futsal tertinggi di kota. Penonton diperbolehkan hadir langsung.'
+    };
+  }
+  if (ev.id === 'ev2') {
+    return {
+      ...ev,
+      title: language === 'en' ? 'BFA Elite Friendly Match' : 'Exhibition Sparring Elite BFA',
+      location: language === 'en' ? 'GOR Pajajaran - Indoor' : 'Lapangan Futsal Indoor GOR Pajajaran',
+      details: language === 'en' 
+        ? 'Exhibition sparring against Sukabumi Futsal Academy to test alternative defensive formation variables.' 
+        : 'Pertandingan sparring eksibisi melawan Sukabumi Futsal Academy untuk menguji variasi formasi pertahanan tim.'
+    };
+  }
+  if (ev.id === 'ev3') {
+    return {
+      ...ev,
+      title: language === 'en' ? 'Summer Training Camps start' : 'Pembukaan Kamp Latihan Intensif',
+      location: language === 'en' ? 'Sempur Outdoor Pitch C' : 'Lapangan Sempur Outdoor C',
+      details: language === 'en' 
+        ? 'A 6-day immersive physical coordination camp dedicated to youth foundations.' 
+        : 'Kamp pelatihan koordinasi fisik mendalam selama 6 hari yang dikhususkan untuk membangun fondasi pemain.'
+    };
+  }
+  return ev;
+}
+
 export default function Events({ events, setCurrentPage }: EventsProps) {
+  const { language } = useLanguage();
   const [selectedMonth, setSelectedMonth] = useState<string>('July 2026');
   const [activeTab, setActiveTab] = useState<'all' | 'upcoming' | 'past'>('all');
   const [selectedDay, setSelectedDay] = useState<number | null>(18); // default selection for upcoming tournament
 
   // Filters events count
-  const filteredEvents = events.filter(ev => {
-    if (activeTab === 'all') return true;
-    if (activeTab === 'upcoming') return ev.status === 'Upcoming';
-    if (activeTab === 'past') return ev.status === 'Past';
-    return true;
-  });
+  const filteredEvents = events
+    .map(ev => getTranslatedEvent(ev, language))
+    .filter(ev => {
+      if (activeTab === 'all') return true;
+      if (activeTab === 'upcoming') return ev.status === 'Upcoming';
+      if (activeTab === 'past') return ev.status === 'Past';
+      return true;
+    });
 
   // Simulated July 2026 Calendar days matrix (starts on Wednesday)
   const calendarDays = [
     { day: null, hasEvent: false }, { day: null, hasEvent: false }, // empty cells padding
-    { day: 1, hasEvent: true, title: 'Summer Training Camps start' }, 
+    { day: 1, hasEvent: true }, 
     { day: 2, hasEvent: false }, { day: 3, hasEvent: false }, { day: 4, hasEvent: false }, { day: 5, hasEvent: false },
     { day: 6, hasEvent: false }, { day: 7, hasEvent: false }, { day: 8, hasEvent: false }, { day: 9, hasEvent: false },
     { day: 10, hasEvent: false }, { day: 11, hasEvent: false }, { day: 12, hasEvent: false }, { day: 13, hasEvent: false },
     { day: 14, hasEvent: false }, { day: 15, hasEvent: false }, { day: 16, hasEvent: false }, { day: 17, hasEvent: false },
-    { day: 18, hasEvent: true, title: 'Bogor Youth Championships' }, 
+    { day: 18, hasEvent: true }, 
     { day: 19, hasEvent: false }, { day: 20, hasEvent: false }, { day: 21, hasEvent: false }, { day: 22, hasEvent: false },
     { day: 23, hasEvent: false }, { day: 24, hasEvent: false }, 
-    { day: 25, hasEvent: true, title: 'BFA Elite Friendly Match' }, 
+    { day: 25, hasEvent: true }, 
     { day: 26, hasEvent: false }, { day: 27, hasEvent: false }, { day: 28, hasEvent: false }, { day: 29, hasEvent: false },
     { day: 30, hasEvent: false }, { day: 31, hasEvent: false }
   ];
 
   const getEventForDay = (day: number | null) => {
     if (!day) return null;
-    if (day === 18) return events.find(e => e.id === 'ev1');
-    if (day === 25) return events.find(e => e.id === 'ev2');
-    if (day === 1) return events.find(e => e.id === 'ev3');
-    return null;
+    let evId = '';
+    if (day === 18) evId = 'ev1';
+    if (day === 25) evId = 'ev2';
+    if (day === 1) evId = 'ev3';
+    
+    const ev = events.find(e => e.id === evId);
+    return ev ? getTranslatedEvent(ev, language) : null;
   };
 
   const currentDayEvent = getEventForDay(selectedDay);
+
+  // Sunday to Saturday or Wednesday to Tuesday headers
+  const dayNames = language === 'en' 
+    ? ['W', 'T', 'F', 'S', 'S', 'M', 'T']
+    : ['R', 'K', 'J', 'S', 'M', 'S', 'S']; // Rabu, Kamis, Jumat, Sabtu, Minggu, Senin, Selasa
+
+  const translatedMonthStr = language === 'en' ? 'July 2026' : 'Juli 2026';
 
   return (
     <div id="events-view-container" className="glow-entrance">
@@ -67,13 +115,15 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
         <div className="absolute inset-0 opacity-15 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=1200')" }} />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
           <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-[0.25em] block mb-3">
-            ACADEMIC MATCH SCHEDULES & WORKSHOPS
+            {language === 'en' ? 'ACADEMIC MATCH SCHEDULES & WORKSHOPS' : 'JADWAL TANDING & WORKSHOP AKADEMI'}
           </span>
           <h1 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-white uppercase tracking-tight">
-            EVENTS & MATCH CALENDAR
+            {language === 'en' ? 'EVENTS & CALENDAR' : 'KALENDAR EVENT & JADWAL'}
           </h1>
           <p className="text-white/70 max-w-2xl text-xs sm:text-sm leading-relaxed mt-3">
-            Track our tournament fixtures, parent workshops, friendly exhibition events, and youth training clinics. Come down and support Bogor&apos;s future champions live!
+            {language === 'en' 
+              ? 'Track our tournament fixtures, parent workshops, friendly exhibition events, and youth training clinics. Come down and support Bogors future champions live!'
+              : 'Dapatkan info lengkap turnamen resmi, workshop orang tua, pertandingan persahabatan, serta klinik pelatihan. Hadir dan dukung langsung calon juara masa depan Bogor!'}
           </p>
         </div>
       </section>
@@ -89,21 +139,21 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
             <div className="flex items-center justify-between border-b border-white/5 pb-4">
               <div className="flex items-center space-x-2.5">
                 <Calendar className="text-accent-blue" size={20} />
-                <h3 className="font-display font-black text-lg text-white uppercase tracking-wider">
-                  Interactive Fixtures Calendar
+                <h3 className="font-display font-black text-sm sm:text-base text-white uppercase tracking-wider">
+                  {language === 'en' ? 'Interactive Fixtures Calendar' : 'Kalender Jadwal Interaktif'}
                 </h3>
               </div>
               
               <div className="flex items-center space-x-2 bg-primary-navy/80 border border-white/10 px-3 py-1 rounded-lg font-mono text-xs text-white">
-                <button className="opacity-40 hover:opacity-100 min-h-[30px] px-1" title="Previous Month">⟨</button>
-                <span className="font-bold uppercase tracking-wider px-2">{selectedMonth}</span>
-                <button className="opacity-40 hover:opacity-100 min-h-[30px] px-1" title="Next Month">⟩</button>
+                <button className="opacity-40 hover:opacity-100 min-h-[30px] px-1" title={language === 'en' ? 'Previous Month' : 'Bulan Sebelumnya'}>⟨</button>
+                <span className="font-bold uppercase tracking-wider px-2">{translatedMonthStr}</span>
+                <button className="opacity-40 hover:opacity-100 min-h-[30px] px-1" title={language === 'en' ? 'Next Month' : 'Bulan Berikutnya'}>⟩</button>
               </div>
             </div>
 
             {/* Calendar Days grid */}
             <div className="grid grid-cols-7 gap-2 text-center">
-              {['W', 'T', 'F', 'S', 'S', 'M', 'T'].map((dayName, idx) => (
+              {dayNames.map((dayName, idx) => (
                 <span key={idx} className="font-mono text-[10px] font-black text-accent-blue/60 uppercase tracking-widest py-2">
                   {dayName}
                 </span>
@@ -142,17 +192,17 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
             <div className="bg-primary-navy/40 p-4 rounded-2xl border border-white/5 space-y-3">
               <h5 className="font-mono text-[10px] font-bold text-white/50 uppercase tracking-wider flex items-center gap-1.5 leading-none">
                 <BadgeInfo size={13} className="text-accent-blue" />
-                Active date selection details:
+                {language === 'en' ? 'Active date selection details:' : 'Detail tanggal yang Anda pilih:'}
               </h5>
               
               {currentDayEvent ? (
-                <div className="flex items-center justify-between text-xs sm:text-sm">
+                <div className="flex items-center justify-between text-xs sm:text-sm gap-4">
                   <div>
-                    <span className="font-display font-bold text-white uppercase text-xs sm:text-sm">
+                    <span className="font-display font-black text-white uppercase text-xs sm:text-sm block">
                       {currentDayEvent.title}
                     </span>
                     <span className="block text-[10px] font-mono text-white/40 mt-1 uppercase">
-                      Type: {currentDayEvent.type} • Venue: {currentDayEvent.location}
+                      {language === 'en' ? 'Type' : 'Jenis'}: {currentDayEvent.type} • {language === 'en' ? 'Venue' : 'Tempat'}: {currentDayEvent.location}
                     </span>
                   </div>
                   
@@ -162,15 +212,17 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
                       const el = document.getElementById(`event-card-${currentDayEvent.id}`);
                       if (el) el.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="p-2 text-accent-blue hover:text-white transition-all text-xs font-bold uppercase tracking-wider flex items-center min-h-[44px]"
+                    className="p-2 text-accent-blue hover:text-white transition-all text-xs font-bold uppercase tracking-wider flex items-center min-h-[44px] shrink-0"
                   >
-                    <span>View Detail</span>
+                    <span>{language === 'en' ? 'View Detail' : 'Lihat Detail'}</span>
                     <ChevronRight size={14} />
                   </button>
                 </div>
               ) : (
                 <p className="text-white/40 text-xs font-mono">
-                  No main events scheduled for {selectedMonth} {selectedDay || ''}. Select any highlighted blue date above.
+                  {language === 'en' 
+                    ? `No main events scheduled for July ${selectedDay || ''}. Select any highlighted blue date above.` 
+                    : `Tidak ada agenda utama pada tanggal ${selectedDay || ''} Juli. Silakan klik tanggal berwarna biru di atas.`}
                 </p>
               )}
             </div>
@@ -183,9 +235,9 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
             {/* Page Filters tabs */}
             <div className="bg-[#000d21]/60 p-1.5 rounded-2xl border border-white/10 flex items-center gap-1 w-full text-center">
               {[
-                { id: 'all', label: 'All Items' },
-                { id: 'upcoming', label: 'Upcoming Only' },
-                { id: 'past', label: 'Match Results' }
+                { id: 'all', label: language === 'en' ? 'All Items' : 'Semua Event' },
+                { id: 'upcoming', label: language === 'en' ? 'Upcoming Only' : 'Mendatang' },
+                { id: 'past', label: language === 'en' ? 'Match Results' : 'Hasil Tanding' }
               ].map(tab => (
                 <button
                   key={tab.id}
@@ -206,7 +258,7 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
             {activeTab !== 'upcoming' && (
               <div className="bg-gradient-to-br from-[#0c234a] to-primary-navy p-5 rounded-2xl border border-accent-blue/30 space-y-4">
                 <span className="text-[10px] bg-accent-blue/15 border border-accent-blue/30 text-accent-blue font-mono px-2.5 py-1 rounded uppercase tracking-wider font-extrabold leading-none inline-block">
-                  LATEST FIELD SCORE DIRECTORY
+                  {language === 'en' ? 'LATEST FIELD SCORE DIRECTORY' : 'DIREKTORI HASIL SKOR AKHIR TERBARU'}
                 </span>
                 
                 <div className="flex items-center justify-between text-center py-2">
@@ -219,7 +271,7 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
                     <span className="font-display font-black text-2xl text-white tracking-widest">
                       5 : 3
                     </span>
-                    <span className="block text-[8px] font-mono text-green-400 uppercase tracking-widest">FINAL WINNER</span>
+                    <span className="block text-[8px] font-mono text-green-400 uppercase tracking-widest">{language === 'en' ? 'FINAL WINNER' : 'PEMENANG UTAMA'}</span>
                   </div>
 
                   <div className="space-y-1">
@@ -229,19 +281,27 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
                 </div>
 
                 <p className="text-[11px] text-white/70 font-sans leading-relaxed text-center">
-                  BFA U18 clinched the gold trophy after scoring three outstanding clean goals during 2nd half fast transitions.
+                  {language === 'en'
+                    ? 'BFA U18 clinched the gold trophy after scoring three outstanding clean goals during 2nd half fast transitions.'
+                    : 'BFA U18 berhasil mengunci piala emas setelah melesakkan tiga gol bersih luar biasa melalui keunggulan transisi cepat di babak kedua.'}
                 </p>
               </div>
             )}
 
             <div className="bg-secondary-navy/20 p-5 rounded-2xl border border-white/5">
-              <h4 className="font-display font-bold text-sm text-white uppercase tracking-wider">Quick Info Contacts</h4>
-              <p className="text-white/60 text-xs mt-1">If your school desires friendly sparring matches against BFA age squads, submit a coordinate request via the contact desk.</p>
+              <h4 className="font-display font-bold text-sm text-white uppercase tracking-wider">
+                {language === 'en' ? 'Quick Info Contacts' : 'Kontak Cepat Laga Uji Coba'}
+              </h4>
+              <p className="text-white/60 text-xs mt-1">
+                {language === 'en'
+                  ? 'If your school desires friendly sparring matches against BFA age squads, submit a coordinate request via the contact desk.'
+                  : 'Jika sekolah atau akademi Anda ingin menyelenggarakan uji coba persahabatan melawan skuat BFA, kirim formulir permintaan sparring di sini.'}
+              </p>
               <button 
                 onClick={() => setCurrentPage('contact')} 
                 className="mt-3 text-xs font-semibold text-accent-blue hover:underline uppercase flex items-center min-h-[40px] cursor-pointer"
               >
-                Inquire Sparring Form ➜
+                {language === 'en' ? 'Inquire Sparring Form ➜' : 'Kirim Pengajuan Sparring ➜'}
               </button>
             </div>
 
@@ -257,10 +317,12 @@ export default function Events({ events, setCurrentPage }: EventsProps) {
           {/* Header block with official branding colors */}
           <div className="space-y-4">
             <h2 className="font-display font-black text-3xl sm:text-4xl text-accent-blue uppercase tracking-tight">
-              Seasonal Tournament
+              {language === 'en' ? 'Seasonal Tournament' : 'Kejuaraan Musiman & Pembinaan Liga'}
             </h2>
             <p className="text-white/80 text-xs sm:text-sm font-sans leading-relaxed max-w-5xl">
-              Selain mengikuti event resmi lingkup akademi seperti LIGA AAFI, BOGOR FA juga mengikuti kejuaraan-kejuaraan lain di Kota Bogor di semua kategori usia seperti : Liga AFKOT Bogor, PSSI Cup Bogor, Summer Football Fest, dan kejuaraan lainnya.
+              {language === 'en'
+                ? 'In addition to participating in official academy internal league matches such as LIGA AAFI, BOGOR FA also regularly competes in prestigious tournaments around Bogor City across all youth age divisions, including: AFKOT Bogor League, PSSI Cup Bogor, Summer Football Fest, and more.'
+                : 'Selain mengikuti event resmi lingkup akademi seperti LIGA AAFI, BOGOR FA juga mengikuti kejuaraan-kejuaraan lain di Kota Bogor di semua kategori usia seperti : Liga AFKOT Bogor, PSSI Cup Bogor, Summer Football Fest, dan kejuaraan lainnya.'}
             </p>
           </div>
 

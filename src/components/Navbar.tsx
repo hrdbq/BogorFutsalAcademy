@@ -8,6 +8,7 @@ import {
   Menu, X, LayoutDashboard, Home, BookOpen, Users, Calendar, Image, Mail, ArrowRight 
 } from 'lucide-react';
 import logoImg from '../assets/images/bfa-logo.png';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface NavbarProps {
   currentPage: string;
@@ -28,6 +29,7 @@ export default function Navbar({
 }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,12 +46,12 @@ export default function Navbar({
 
   // Nav links for the public website with designated visual representation icons
   const pubLinks = [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'programs', label: 'Programs', icon: BookOpen },
-    { id: 'coaches', label: 'Coaches & Staff', icon: Users },
-    { id: 'events', label: 'Events', icon: Calendar },
-    { id: 'gallery', label: 'Gallery', icon: Image },
-    { id: 'contact', label: 'Contact', icon: Mail }
+    { id: 'home', label: t('nav.home'), icon: Home },
+    { id: 'programs', label: t('nav.programs'), icon: BookOpen },
+    { id: 'coaches', label: t('nav.coaches'), icon: Users },
+    { id: 'events', label: t('nav.events'), icon: Calendar },
+    { id: 'gallery', label: t('nav.gallery'), icon: Image },
+    { id: 'contact', label: t('nav.contact'), icon: Mail }
   ];
 
   const handleLinkClick = (pageId: string) => {
@@ -62,9 +64,9 @@ export default function Navbar({
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
       isScrolled 
-        ? 'bg-[#020e22]/90 backdrop-blur-md border-b border-white/5 shadow-xl' 
+        ? 'bg-[#020e22]/90 backdrop-blur-md border-b border-white/5 shadow-xl scrolled-header' 
         : 'bg-transparent border-none'
-    }`}>
+    } ${!isScrolled && currentPage === 'home' ? 'navbar-home-unscrolled' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center justify-between transition-all duration-300 ${
           isScrolled ? 'h-28' : 'h-36'
@@ -114,6 +116,25 @@ export default function Navbar({
                   </button>
                 );
               })}
+
+              {/* Language switcher inline beside Contact */}
+              <div className="flex items-center space-x-1.5 bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-full border border-white/10 select-none text-[10px] font-mono tracking-wider font-extrabold ml-4">
+                <button
+                  type="button"
+                  onClick={() => setLanguage('en')}
+                  className={`px-1 rounded transition-colors cursor-pointer ${language === 'en' ? 'text-accent-blue font-black' : 'text-white/40 hover:text-white'}`}
+                >
+                  EN
+                </button>
+                <span className="text-white/20 select-none">|</span>
+                <button
+                  type="button"
+                  onClick={() => setLanguage('id')}
+                  className={`px-1 rounded transition-colors cursor-pointer ${language === 'id' ? 'text-accent-blue font-black' : 'text-white/40 hover:text-white'}`}
+                >
+                  ID
+                </button>
+              </div>
             </nav>
           )}
 
@@ -127,13 +148,13 @@ export default function Navbar({
                   currentPage === 'registration' ? 'ring-2 ring-white/50' : ''
                 }`}
               >
-                <span>REGISTRATION</span>
+                <span>{t('nav.registration')}</span>
                 <ArrowRight size={13} className="ml-1.5 animate-pulse" />
               </button>
             ) : (
               <div id="desktop-admin-indicator" className="flex items-center space-x-2 text-accent-blue bg-white/10 px-4 py-2 rounded-full border border-white/10">
                 <LayoutDashboard size={14} />
-                <span className="font-display font-bold uppercase text-[10px] tracking-wider">CMS ACTIVE</span>
+                <span className="font-display font-bold uppercase text-[10px] tracking-wider">{t('nav.cms_active')}</span>
                 {totalNotifications > 0 && (
                   <span className="flex h-2 w-2 rounded-full bg-red-500 animate-pulse" />
                 )}
@@ -141,12 +162,31 @@ export default function Navbar({
             )}
           </div>
 
-          {/* Hamburger Mobile Menu Trigger */}
-          <div className="flex lg:hidden items-center space-x-2">
+          {/* Hamburger Mobile Menu Trigger with localized label support */}
+          <div className="flex lg:hidden items-center space-x-3">
+            {/* Elegant Mobile Language select pill */}
+            <div className="flex items-center space-x-1.5 bg-white/10 px-2.5 py-1 rounded-full border border-white/10 text-[10px] font-mono font-bold">
+              <button
+                type="button"
+                onClick={() => setLanguage('en')}
+                className={`px-1 rounded transition-colors cursor-pointer ${language === 'en' ? 'text-accent-blue font-black' : 'text-white/40'}`}
+              >
+                EN
+              </button>
+              <span className="text-white/20">|</span>
+              <button
+                type="button"
+                onClick={() => setLanguage('id')}
+                className={`px-1 rounded transition-colors cursor-pointer ${language === 'id' ? 'text-accent-blue font-black' : 'text-white/40'}`}
+              >
+                ID
+              </button>
+            </div>
+
             <button
               id="mobile-menu-trigger"
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-full text-white/75 hover:text-white bg-white/10 hover:bg-white/15 border border-white/5 transition-all min-w-[40px] min-h-[40px] flex items-center justify-center"
+              className="p-2 rounded-full text-white/75 hover:text-white bg-white/10 hover:bg-white/15 border border-white/5 transition-all min-w-[40px] min-h-[40px] flex items-center justify-center animate-none"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -178,10 +218,10 @@ export default function Navbar({
               <div className="p-4 space-y-4">
                 <div className="bg-secondary-navy/60 p-3 rounded-lg border border-accent-blue/20 text-center">
                   <span className="font-display font-black text-xs uppercase tracking-wider text-accent-blue">
-                    CMS ADMIN HUB ACTIVE
+                    {t('nav.cms_hub_active')}
                   </span>
                   <p className="text-[11px] text-white/60 mt-1">
-                    Manage student roster, schedules, billing cycles, and media uploads below.
+                    {t('nav.cms_hub_desc')}
                   </p>
                 </div>
               </div>
@@ -195,7 +235,7 @@ export default function Navbar({
                   onClick={() => handleLinkClick('registration')}
                   className="w-full py-3 bg-accent-blue hover:bg-accent-blue/90 text-primary-navy rounded-xl font-display font-black text-sm uppercase tracking-[0.1em] text-center min-h-[44px]"
                 >
-                  JOIN FREE TRIAL
+                  {t('nav.join_trial')}
                 </button>
               )}
             </div>

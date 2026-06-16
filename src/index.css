@@ -6,15 +6,22 @@
   --font-display: "Outfit", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   
-  --color-primary-navy: #011B41;
-  --color-secondary-navy: #082C5A;
-  --color-accent-blue: #64B5E6;
-  --color-light-gray: #E1E5E8;
+  --color-primary-navy: var(--primary-navy);
+  --color-secondary-navy: var(--secondary-navy);
+  --color-accent-blue: var(--accent-blue);
+  --color-light-gray: var(--light-gray);
+}
+
+:root {
+  --primary-navy: #011B41;
+  --secondary-navy: #082C5A;
+  --accent-blue: #64B5E6;
+  --light-gray: #E1E5E8;
 }
 
 /* Base style resets and beautiful styling additions */
 html, body, #root {
-  background-color: #011B41;
+  background-color: var(--primary-navy);
   color: #FFFFFF;
   font-family: var(--font-sans);
   overflow-x: hidden;
@@ -70,3 +77,973 @@ button:focus-visible, a:focus-visible {
 .glow-pulse {
   animation: pulseGlow 4s infinite ease-in-out;
 }
+
+/* ========================================== */
+/* BFA COHESIVE PREMIUM LIGHT THEME ENGINE    */
+/* ========================================== */
+
+body.light-theme, html.light-theme, #root.light-theme, .light-theme {
+  --primary-navy: #FEFDFB;
+  --secondary-navy: #FFFFFF;
+  --accent-blue: #5CBDF4;
+  --light-gray: #00295F;
+
+  background-color: #FEFDFB !important;
+  color: #00295F !important;
+}
+
+/* Text adaptations */
+.light-theme .text-white {
+  color: #00295F !important;
+}
+.light-theme .text-white\/30 {
+  color: rgba(0, 41, 95, 0.4) !important;
+}
+.light-theme .text-white\/40 {
+  color: rgba(0, 41, 95, 0.5) !important;
+}
+.light-theme .text-white\/45 {
+  color: rgba(0, 41, 95, 0.55) !important;
+}
+.light-theme .text-white\/50 {
+  color: rgba(0, 41, 95, 0.6) !important;
+}
+.light-theme .text-white\/60 {
+  color: rgba(0, 41, 95, 0.65) !important;
+}
+.light-theme .text-white\/70 {
+  color: rgba(0, 41, 95, 0.75) !important;
+}
+.light-theme .text-white\/75 {
+  color: rgba(0, 41, 95, 0.8) !important;
+}
+.light-theme .text-white\/80 {
+  color: rgba(0, 41, 95, 0.85) !important;
+}
+.light-theme .text-white\/90 {
+  color: #00295F !important;
+}
+.light-theme .text-accent-blue {
+  color: #005F9A !important;
+}
+.light-theme .text-\[\#64B5E6\] {
+  color: #005F9A !important;
+}
+.light-theme .text-\[\#011B41\] {
+  color: #00295F !important;
+}
+.light-theme .hover\:text-\[\#64B5E6\]:hover {
+  color: #5CBDF4 !important;
+}
+
+/* Hex Background Overloads */
+.light-theme .bg-\[\#011B41\] {
+  background-color: #FEFDFB !important;
+}
+.light-theme .bg-\[\#000d21\] {
+  background-color: #F1F5F9 !important;
+}
+.light-theme .bg-\[\#000d21\]\/60 {
+  background-color: rgba(92, 189, 244, 0.15) !important;
+}
+.light-theme .bg-\[\#000d21\]\/50 {
+  background-color: rgba(92, 189, 244, 0.12) !important;
+}
+.light-theme .bg-\[\#000d21\]\/40 {
+  background-color: rgba(92, 189, 244, 0.09) !important;
+}
+.light-theme .bg-\[\#000d21\]\/30 {
+  background-color: rgba(92, 189, 244, 0.06) !important;
+}
+.light-theme .bg-\[\#000d21\]\/95 {
+  background-color: rgba(254, 253, 251, 0.95) !important;
+}
+.light-theme .bg-\[\#031633\] {
+  background-color: #FFFFFF !important;
+  border-color: rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .bg-\[\#031633\]\/90 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .bg-secondary-navy {
+  background-color: #FFFFFF !important;
+  border-color: rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .bg-secondary-navy\/40 {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .bg-secondary-navy\/60 {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .bg-secondary-navy\/20 {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(0, 41, 95, 0.05) !important;
+}
+.light-theme .bg-[#082C5A] {
+  background-color: #FFFFFF !important;
+}
+.light-theme .bg-\[\#082C5A\] {
+  background-color: #FFFFFF !important;
+}
+.light-theme .bg-\[\#082C5A\]\/40 {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+.light-theme .bg-primary-navy {
+  background-color: #FEFDFB !important;
+}
+.light-theme .bg-primary-navy\/95 {
+  background-color: rgba(254, 253, 251, 0.95) !important;
+}
+.light-theme .bg-primary-navy\/55 {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .bg-primary-navy\/30 {
+  background-color: rgba(92, 189, 244, 0.05) !important;
+}
+.light-theme .bg-primary-navy\/40 {
+  background-color: rgba(92, 189, 244, 0.08) !important;
+}
+.light-theme .bg-primary-navy\/60 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .bg-primary-navy\/80 {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 41, 95, 0.12) !important;
+  color: #00295F !important;
+}
+.light-theme .bg-primary-navy\/85 {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 41, 95, 0.12) !important;
+  color: #00295F !important;
+}
+.light-theme .bg-secondary-navy\/10 {
+  background-color: rgba(0, 41, 95, 0.02) !important;
+}
+.light-theme .bg-secondary-navy\/20 {
+  background-color: rgba(0, 41, 95, 0.04) !important;
+}
+.light-theme .bg-secondary-navy\/25 {
+  background-color: rgba(0, 41, 95, 0.05) !important;
+}
+.light-theme .bg-secondary-navy\/30 {
+  background-color: rgba(0, 41, 95, 0.06) !important;
+}
+.light-theme .bg-secondary-navy\/45 {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-color: rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .bg-secondary-navy\/80 {
+  background-color: #FFFFFF !important;
+  color: #00295F !important;
+  border: 1px solid rgba(0, 41, 95, 0.12) !important;
+}
+.light-theme .bg-secondary-navy\/80:hover {
+  background-color: rgba(0, 41, 95, 0.05) !important;
+}
+
+/* Gradients support */
+.light-theme .from-\[\#011B41\] {
+  --tw-gradient-from: #FEFDFB !important;
+  --tw-gradient-to: rgba(254, 253, 251, 0) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+.light-theme .to-primary-navy {
+  --tw-gradient-to: #FEFDFB !important;
+}
+.light-theme .from-\[\#082C5A\] {
+  --tw-gradient-from: #FFFFFF !important;
+}
+.light-theme .from-secondary-navy {
+  --tw-gradient-from: #FFFFFF !important;
+}
+.light-theme .from-\[\#0c234a\] {
+  --tw-gradient-from: #E6EEF4 !important;
+}
+.light-theme .from-\[\#031633\] {
+  --tw-gradient-from: #FFFFFF !important;
+}
+.light-theme .to-\[\#031633\] {
+  --tw-gradient-to: rgba(255, 255, 255, 0) !important;
+}
+
+/* Borders adjustment */
+.light-theme .border-white\/5 {
+  border-color: rgba(0, 41, 95, 0.05) !important;
+}
+.light-theme .border-white\/10 {
+  border-color: rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .border-white\/20 {
+  border-color: rgba(0, 41, 95, 0.15) !important;
+}
+
+/* Hover feedback and glass items */
+.light-theme .glass-panel {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .glow-border:hover {
+  border-color: rgba(92, 189, 244, 0.4) !important;
+  box-shadow: 0 0 15px rgba(92, 189, 244, 0.1) !important;
+}
+
+/* Specific elements background adjustments */
+.light-theme .bg-white\/15 {
+  background-color: rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .bg-white\/10 {
+  background-color: rgba(0, 41, 95, 0.05) !important;
+}
+.light-theme .bg-white\/5 {
+  background-color: rgba(0, 41, 95, 0.02) !important;
+}
+.light-theme .hover\/bg-white\/5:hover, .light-theme .hover\:bg-white\/5:hover {
+  background-color: rgba(0, 41, 95, 0.04) !important;
+}
+.light-theme .hover\:bg-white\/10:hover, .light-theme .hover\:bg-white\/10:hover {
+  background-color: rgba(0, 41, 95, 0.06) !important;
+}
+.light-theme .hover\/bg-white\/15:hover, .light-theme .hover\:bg-white\/15:hover {
+  background-color: rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme .hover\:bg-white\/20:hover, .light-theme .hover\:bg-white\/20:hover {
+  background-color: rgba(0, 41, 95, 0.12) !important;
+}
+.light-theme .hover\:text-white:hover {
+  color: #00295F !important;
+}
+
+/* Forms & buttons */
+.light-theme input, .light-theme select, .light-theme textarea {
+  background-color: #FFFFFF !important;
+  color: #00295F !important;
+  border-color: rgba(0, 41, 95, 0.15) !important;
+}
+.light-theme input::placeholder, .light-theme textarea::placeholder {
+  color: #64748B !important;
+}
+.light-theme .border-white\/15 {
+  border-color: rgba(0, 41, 95, 0.12) !important;
+}
+
+/* Custom styling for bg-white buttons & controls to provide contrast in Light Theme */
+.light-theme button.bg-white,
+.light-theme .bg-white {
+  background-color: #FFFFFF !important;
+  color: #00295F !important;
+  border: 1px solid rgba(0, 41, 95, 0.12) !important;
+  box-shadow: 0 2px 8px rgba(0, 41, 95, 0.03) !important;
+}
+.light-theme button.bg-white:hover,
+.light-theme .bg-white:hover {
+  background-color: #5CBDF4 !important;
+  color: #00295F !important;
+  border-color: #5CBDF4 !important;
+}
+
+/* Exclude the dark immersive Home page Hero section from white button override to keep its dramatic dark cinematic look */
+.light-theme #home-hero-section button.bg-white,
+.light-theme #home-hero-section .bg-white {
+  background-color: #FFFFFF !important;
+  color: #011B41 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.light-theme #home-hero-section button.bg-white:hover,
+.light-theme #home-hero-section .bg-white:hover {
+  background-color: #5CBDF4 !important;
+  color: #011B41 !important;
+}
+
+/* CTAs styling */
+.light-theme .bg-accent-blue.text-primary-navy {
+  color: #00295F !important;
+  background-color: #5CBDF4 !important;
+}
+.light-theme .bg-accent-blue {
+  background-color: #5CBDF4 !important;
+  color: #00295F !important;
+  border: 1px solid rgba(0, 41, 95, 0.05) !important;
+  box-shadow: 0 4px 12px rgba(92, 189, 244, 0.2) !important;
+}
+.light-theme .hover\:bg-accent-blue\/90:hover {
+  background-color: #38b1f2 !important;
+  color: #00295F !important;
+  box-shadow: 0 4px 15px rgba(92, 189, 244, 0.35) !important;
+}
+.light-theme .bg-accent-blue\/90 {
+  background-color: #5CBDF4 !important;
+  color: #00295F !important;
+  border: 1px solid rgba(0, 41, 95, 0.05) !important;
+}
+.light-theme .bg-accent-blue\/90:hover {
+  background-color: #38b1f2 !important;
+  color: #00295F !important;
+}
+
+/* Admin/CRM Specific support to ensure outstanding visibility in Light mode */
+.light-theme table {
+  color: #00295F !important;
+}
+.light-theme th {
+  color: rgba(0, 41, 95, 0.8) !important;
+  background-color: #F1F5F9 !important;
+}
+.light-theme td {
+  border-color: rgba(0, 41, 95, 0.06) !important;
+}
+.light-theme tr:hover {
+  background-color: rgba(0, 41, 95, 0.02) !important;
+}
+.light-theme .text-primary-navy {
+  color: #00295F !important;
+}
+.light-theme .hover\:text-primary-navy:hover {
+  color: #00295F !important;
+}
+
+/* Custom Header & Scrolled Navigation adjustments for Theme Light */
+.light-theme .scrolled-header,
+.light-theme header.bg-\[\#020e22\]\/90 {
+  background-color: rgba(254, 253, 251, 0.95) !important;
+  border-bottom: 1px solid rgba(0, 41, 95, 0.08) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 41, 95, 0.05), 0 8px 10px -6px rgba(0, 41, 95, 0.05) !important;
+}
+
+/* Ensure mobile drawer gets beautifully coordinated light background and borders */
+.light-theme #mobile-drawer {
+  background-color: rgba(254, 253, 251, 0.95) !important;
+  border-bottom: 1px solid rgba(0, 41, 95, 0.08) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+/* Maintain dark immersive Hero on Home page in Light Theme */
+.light-theme #home-hero-section {
+  background-color: #011B41 !important;
+  color: #FFFFFF !important;
+}
+.light-theme #home-hero-section .text-white {
+  color: #FFFFFF !important;
+}
+.light-theme #home-hero-section .text-white\/80 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+.light-theme #home-hero-section .text-white\/50 {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+.light-theme #home-hero-section .text-white\/60 {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+.light-theme #home-hero-section .border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.light-theme #home-hero-section .bg-secondary-navy {
+  background-color: #082C5A !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+.light-theme #home-hero-section .hover\:bg-secondary-navy\/80:hover {
+  background-color: rgba(8, 44, 90, 0.8) !important;
+}
+
+/* When NOT scrolled on the Home page in Light Theme, match the dark-vibe of the Hero video */
+.light-theme .navbar-home-unscrolled {
+  background-color: transparent !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.light-theme .navbar-home-unscrolled .text-white {
+  color: #FFFFFF !important;
+}
+
+.light-theme .navbar-home-unscrolled .text-white\/60 {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.light-theme .navbar-home-unscrolled .text-white\/75 {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.light-theme .navbar-home-unscrolled .hover\:text-white:hover {
+  color: #FFFFFF !important;
+}
+
+.light-theme .navbar-home-unscrolled .bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.light-theme .navbar-home-unscrolled .bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.light-theme .navbar-home-unscrolled .border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.light-theme .navbar-home-unscrolled .border-white\/20 {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.light-theme .navbar-home-unscrolled .bg-accent-blue {
+  background-color: #5CBDF4 !important;
+  color: #011B41 !important;
+}
+
+/* ======================================================= */
+/* BFA PLAYER DEVELOPMENT PATHWAY LIGHT THEME OVERRIDES    */
+/* ======================================================= */
+
+.light-theme #development-pathway {
+  background-color: #FEFDFB !important;
+  border-top: 1px solid rgba(0, 41, 95, 0.08) !important;
+  border-bottom: 1px solid rgba(0, 41, 95, 0.08) !important;
+}
+
+/* Outer layout typography colors */
+.light-theme #development-pathway h2 {
+  color: #00295F !important;
+}
+.light-theme #development-pathway .text-white\/60 {
+  color: rgba(0, 41, 95, 0.7) !important;
+}
+
+/* Interactive core card */
+.light-theme #development-pathway .grid-cols-1.lg\:grid-cols-12 {
+  background-color: #FFFFFF !important;
+  border-color: rgba(0, 41, 95, 0.08) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 41, 95, 0.06), 0 1px 3px rgba(0, 41, 95, 0.02) !important;
+}
+
+/* Ensure photo background overlay remains dark so caption stands out clearly */
+.light-theme #development-pathway .lg\:col-span-5 .absolute.inset-0.bg-gradient-to-t {
+  --tw-gradient-from: #00295F !important;
+}
+.light-theme #development-pathway .lg\:col-span-5 .text-white {
+  color: #FFFFFF !important;
+}
+
+/* Selector tabs styling */
+.light-theme #pathway-menu {
+  border-color: rgba(0, 41, 95, 0.08) !important;
+}
+.light-theme #pathway-menu button {
+  color: rgba(0, 41, 95, 0.6) !important;
+}
+.light-theme #pathway-menu button.text-accent-blue {
+  color: #005F9A !important;
+}
+.light-theme #pathway-menu button:hover {
+  color: #00295F !important;
+}
+
+/* Active category squad badge */
+.light-theme #development-pathway .bg-accent-blue {
+  background-color: rgba(92, 189, 244, 0.15) !important;
+  color: #005F9A !important;
+}
+.light-theme #development-pathway .text-\[\#011B41\] {
+  color: #00295F !important;
+}
+
+/* Label & main card typography */
+.light-theme #development-pathway .text-white\/40 {
+  color: rgba(0, 41, 95, 0.6) !important;
+}
+.light-theme #development-pathway h3.text-white {
+  color: #00295F !important;
+}
+.light-theme #development-pathway p.text-white\/80 {
+  color: rgba(0, 41, 95, 0.8) !important;
+}
+
+/* Core checklist benchmarks block */
+.light-theme #development-pathway .bg-\[\#000d21\]\/40 {
+  background-color: rgba(92, 189, 244, 0.08) !important;
+  border-color: rgba(0, 41, 95, 0.06) !important;
+}
+.light-theme #development-pathway .bg-\[\#000d21\]\/40 h5 {
+  color: #00295F !important;
+}
+.light-theme #development-pathway .bg-\[\#000d21\]\/40 ul {
+  color: rgba(0, 41, 95, 0.8) !important;
+}
+.light-theme #development-pathway .bg-\[\#000d21\]\/40 li {
+  color: rgba(0, 41, 95, 0.8) !important;
+}
+
+/* Stats parameter blocks */
+.light-theme #development-pathway .bg-\[\#000d21\]\/30 {
+  background-color: rgba(92, 189, 244, 0.05) !important;
+  border-color: rgba(0, 41, 95, 0.05) !important;
+}
+.light-theme #development-pathway .bg-\[\#000d21\]\/30 .text-white\/40 {
+  color: rgba(0, 41, 95, 0.6) !important;
+}
+.light-theme #development-pathway .bg-\[\#000d21\]\/30 .text-white {
+  color: #00295F !important;
+}
+
+/* Card bottom divider */
+.light-theme #development-pathway .border-t.border-white\/10 {
+  border-color: rgba(0, 41, 95, 0.08) !important;
+}
+
+/* Action buttons */
+.light-theme #pathway-apply-btn {
+  background-color: #00295F !important;
+  color: #FFFFFF !important;
+}
+.light-theme #pathway-apply-btn:hover {
+  background-color: #001f4a !important;
+}
+.light-theme #pathway-more-btn {
+  border-color: rgba(0, 41, 95, 0.2) !important;
+  color: #00295F !important;
+}
+.light-theme #pathway-more-btn:hover {
+  background-color: rgba(0, 41, 95, 0.04) !important;
+  color: #00295F !important;
+}
+
+/* ======================================================= */
+/* BFA PROGRAMS VIEW OVERLAY & TEXT THEME ADJUSTMENTS      */
+/* ======================================================= */
+
+.program-card-image-overlay {
+  transition: all 0.3s ease !important;
+}
+
+.light-theme .program-card-image-overlay {
+  background-image: linear-gradient(to top, rgba(0, 41, 95, 0.8) 0%, rgba(0, 41, 95, 0.2) 35%, rgba(0, 41, 95, 0) 60%) !important;
+}
+
+@media (min-width: 1024px) {
+  .light-theme .program-card-image-overlay {
+    background-image: linear-gradient(to right, rgba(0, 41, 95, 0.8) 0%, rgba(0, 41, 95, 0.2) 35%, rgba(0, 41, 95, 0) 60%) !important;
+  }
+}
+
+.light-theme .program-card-title {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 6px rgba(0, 13, 33, 0.5) !important;
+}
+
+.light-theme .program-card-tagline {
+  color: #5CBDF4 !important;
+  text-shadow: 0 1px 4px rgba(0, 13, 33, 0.4) !important;
+}
+
+/* ======================================================= */
+/* PREMIUM CARDS VISIBILITY & ELEVATION FOR LIGHT THEME    */
+/* ======================================================= */
+
+/* Standard card backgrounds mapping to clean, prominent, elevated white cards */
+.light-theme .bg-secondary-navy\/20,
+.light-theme .bg-secondary-navy\/30,
+.light-theme .bg-secondary-navy\/40,
+.light-theme .bg-secondary-navy\/45,
+.light-theme .bg-secondary-navy\/60,
+.light-theme .bg-primary-navy\/40,
+.light-theme .bg-primary-navy\/55,
+.light-theme .bg-primary-navy\/60,
+.light-theme .bg-primary-navy\/80,
+.light-theme .bg-primary-navy\/85,
+.light-theme .bg-\[\#031633\],
+.light-theme .bg-\[\#031633\]\/90,
+.light-theme .bg-\[\#000d21\]\/60,
+.light-theme .glass-panel {
+  background-color: #FFFFFF !important;
+  color: #00295F !important;
+  border: 1px solid rgba(0, 41, 120, 0.09) !important;
+  box-shadow: 0 10px 25px -4px rgba(0, 41, 120, 0.05), 0 4px 12px -2px rgba(0, 41, 120, 0.02) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Specific elements like Calendar cells, table headers, small parameters / nested blocks inside cards */
+.light-theme .bg-\[\#000d21\]\/30,
+.light-theme .bg-secondary-navy\/10,
+.light-theme .bg-secondary-navy\/25 {
+  background-color: rgba(92, 189, 244, 0.05) !important;
+  border: 1px solid rgba(0, 41, 120, 0.06) !important;
+  color: #00295F !important;
+}
+
+/* Dialog and details modal containers on light theme */
+.light-theme .fixed .bg-secondary-navy {
+  background-color: #FFFFFF !important;
+  color: #00295F !important;
+  border: 1px solid rgba(0, 41, 120, 0.15) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 41, 120, 0.15) !important;
+}
+
+/* Form block step backgrounds inside Registration/Admin */
+.light-theme .max-w-xl.bg-secondary-navy\/40,
+.light-theme .max-w-2xl.bg-secondary-navy\/40 {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 41, 120, 0.12) !important;
+  box-shadow: 0 20px 40px -10px rgba(0, 41, 120, 0.06) !important;
+}
+
+/* Hover effects to make these cards feel reactive, lively, and incredibly premium */
+.light-theme .glow-border:hover,
+.light-theme .bg-secondary-navy\/20:hover,
+.light-theme .bg-secondary-navy\/30:hover,
+.light-theme .bg-\[\#031633\]:hover,
+.light-theme .bg-\[\#031633\]\/90:hover {
+  border-color: rgba(92, 189, 244, 0.5) !important;
+  box-shadow: 0 20px 35px -8px rgba(0, 41, 120, 0.08), 0 8px 16px -4px rgba(0, 41, 120, 0.04) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Ensure correct hover effect on lists and tables */
+.light-theme .hover\:bg-white\/5:hover {
+  background-color: rgba(0, 41, 120, 0.04) !important;
+}
+
+/* ======================================================= */
+/* COACHES & STAFF CARDS & MODAL LIGHT THEME CUSTOMIZATION */
+/* ======================================================= */
+
+.light-theme .coach-card {
+  background-color: #FFFFFF !important;
+  color: #00295F !important;
+  border: 1px solid rgba(0, 41, 120, 0.08) !important;
+  box-shadow: 0 10px 25px -4px rgba(0, 41, 120, 0.05) !important;
+}
+
+.light-theme .coach-photo-overlay {
+  background-image: linear-gradient(to top, rgba(0, 23, 54, 0.95) 0%, rgba(0, 23, 54, 0.3) 60%, transparent 100%) !important;
+  opacity: 0.8 !important;
+}
+
+.light-theme .coach-card-name {
+  color: #FFFFFF !important;
+}
+
+.light-theme .coach-card-position {
+  color: #5CBDF4 !important;
+}
+
+.light-theme .coach-spec-container {
+  border-bottom-color: rgba(0, 41, 120, 0.08) !important;
+}
+
+.light-theme .coach-stat-label {
+  color: rgba(0, 41, 120, 0.5) !important;
+}
+
+.light-theme .coach-stat-value {
+  color: #00295F !important;
+}
+
+.light-theme .coach-achievements-list {
+  color: #00295F !important;
+}
+
+.light-theme .coach-bio-btn {
+  background-color: rgba(92, 189, 244, 0.08) !important;
+  border: 1px solid rgba(92, 189, 244, 0.15) !important;
+  color: #00295F !important;
+}
+
+.light-theme .coach-bio-btn:hover {
+  background-color: #5CBDF4 !important;
+  border-color: #5CBDF4 !important;
+  color: #00295F !important;
+}
+
+/* Modal styling in Light mode */
+.light-theme .coach-modal {
+  background-color: #FFFFFF !important;
+  color: #00295F !important;
+  border: 1px solid rgba(0, 41, 120, 0.15) !important;
+}
+
+.light-theme .coach-modal-name {
+  color: #00295F !important;
+}
+
+.light-theme .coach-modal-position {
+  color: rgba(0, 41, 120, 0.6) !important;
+}
+
+.light-theme .coach-modal-bio {
+  background-color: rgba(92, 189, 244, 0.05) !important;
+  color: #00295F !important;
+  border-left-color: #5CBDF4 !important;
+}
+
+.light-theme .coach-modal-achievements {
+  color: #00295F !important;
+}
+
+.light-theme .coach-modal-footer {
+  background-color: rgba(92, 189, 244, 0.06) !important;
+  border: 1px solid rgba(92, 189, 244, 0.1) !important;
+  color: #00295F !important;
+}
+
+.light-theme .coach-modal-close {
+  background-color: rgba(0, 41, 120, 0.05) !important;
+  border-color: rgba(0, 41, 120, 0.08) !important;
+  color: #00295F !important;
+}
+
+.light-theme .coach-modal-close:hover {
+  background-color: rgba(0, 41, 120, 0.12) !important;
+  color: #00295F !important;
+}
+
+/* ======================================================= */
+/* DIRECTOR MESSAGE CARD LIGHT THEME OVERRIDES             */
+/* ======================================================= */
+
+.light-theme .director-message-card {
+  background: #FFFFFF !important;
+  color: #00295F !important;
+  border: 1px solid rgba(0, 41, 120, 0.12) !important;
+  box-shadow: 0 20px 40px -8px rgba(0, 41, 120, 0.08) !important;
+}
+
+.light-theme .director-message-card h3 {
+  color: #011B41 !important;
+}
+
+.light-theme .director-message-card p {
+  color: rgba(1, 27, 65, 0.8) !important;
+}
+
+.light-theme .director-message-card .border-t {
+  border-top-color: rgba(0, 41, 120, 0.08) !important;
+}
+
+.light-theme .director-message-card .text-white {
+  color: #011B41 !important;
+}
+
+.light-theme .director-message-card .text-white\/50,
+.light-theme .director-message-card .text-white\/60,
+.light-theme .director-message-card .text-white\/70,
+.light-theme .director-message-card .text-white\/80 {
+  color: rgba(1, 27, 65, 0.7) !important;
+}
+
+.light-theme .director-message-card .text-accent-blue\/80 {
+  color: #0088cc !important;
+}
+
+/* ======================================================= */
+/* CLASSES & VENUE SECTION LIGHT THEME OVERRIDES           */
+/* ======================================================= */
+
+.light-theme .venue-section h2 {
+  color: #011B41 !important;
+}
+
+.light-theme .venue-section-desc {
+  color: rgba(1, 27, 65, 0.7) !important;
+}
+
+/* Cards wrappers */
+.light-theme .venue-card {
+  background-color: #FFFFFF !important;
+  color: #00295F !important;
+  border: 1px solid rgba(0, 41, 120, 0.08) !important;
+  box-shadow: 0 15px 35px -5px rgba(0, 41, 120, 0.06) !important;
+}
+
+/* ACTIVE COMPLEX Badge */
+.light-theme .venue-active-badge {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  border-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+.light-theme .venue-active-text {
+  color: #059669 !important;
+}
+
+/* Map frame adjustments: remove full-dark grayscale in light mode for proper contrast */
+.light-theme .venue-map-iframe {
+  filter: grayscale(0.2) invert(0) contrast(1) !important;
+}
+
+/* Venue details */
+.light-theme .venue-title {
+  color: #011B41 !important;
+}
+
+.light-theme .venue-desc {
+  color: rgba(1, 27, 65, 0.65) !important;
+}
+
+.light-theme .venue-directions-btn {
+  background-color: rgba(0, 41, 120, 0.05) !important;
+  color: #00295F !important;
+  border-color: rgba(0, 41, 120, 0.1) !important;
+}
+
+.light-theme .venue-directions-btn:hover {
+  background-color: #5CBDF4 !important;
+  color: #011B41 !important;
+  border-color: #5CBDF4 !important;
+}
+
+/* Weekly Practice Schedule */
+.light-theme .venue-sched-title {
+  color: #011B41 !important;
+}
+
+.light-theme .venue-sched-subtitle {
+  color: rgba(1, 27, 65, 0.5) !important;
+}
+
+.light-theme .venue-sched-block {
+  background-color: rgba(92, 189, 244, 0.05) !important;
+  border-color: rgba(0, 41, 120, 0.07) !important;
+}
+
+.light-theme .venue-sched-day {
+  color: #0284C7 !important; /* Richer sky-blue suitable for light background */
+}
+
+.light-theme .venue-sched-type {
+  background-color: rgba(0, 41, 120, 0.04) !important;
+  border-color: rgba(0, 41, 120, 0.08) !important;
+  color: rgba(1, 27, 65, 0.6) !important;
+}
+
+.light-theme .venue-sched-time {
+  color: #011B41 !important;
+}
+
+.light-theme .venue-sched-desc {
+  color: rgba(1, 27, 65, 0.6) !important;
+}
+
+/* Action booking button */
+.light-theme .venue-booking-btn {
+  background-color: #011B41 !important;
+  color: #FFFFFF !important;
+  border-color: #011B41 !important;
+}
+
+.light-theme .venue-booking-btn:hover {
+  background-color: #0088cc !important;
+  border-color: #0088cc !important;
+  color: #FFFFFF !important;
+}
+
+/* ======================================================= */
+/* WHY CHOOSE US (WHY BFA) SECTION LIGHT THEME OVERRIDES   */
+/* ======================================================= */
+
+.light-theme #why-choose-us h2 {
+  color: #011B41 !important;
+}
+
+.light-theme #why-choose-us p {
+  color: rgba(1, 27, 65, 0.7) !important;
+}
+
+.light-theme #why-choose-us .text-white\/60 {
+  color: rgba(1, 27, 65, 0.6) !important;
+}
+
+.light-theme #why-choose-us h3 {
+  color: #011B41 !important;
+}
+
+.light-theme #why-choose-us .text-white\/70,
+.light-theme #why-choose-us .text-white\/50 {
+  color: rgba(1, 27, 65, 0.7) !important;
+}
+
+.light-theme #why-choose-us .border-white\/10 {
+  border-color: rgba(0, 41, 120, 0.08) !important;
+}
+
+.light-theme #why-choose-us .bg-white\/5 {
+  background-color: rgba(0, 41, 120, 0.03) !important;
+}
+
+/* Inline text link buttons in Card 1 & Card 4 */
+.light-theme #why-choose-us .text-accent-blue {
+  color: #0284C7 !important;
+}
+
+.light-theme #why-choose-us .hover\:text-white:hover {
+  color: #011B41 !important;
+}
+
+/* CTA Buttons inside Card 2 & Card 3 */
+.light-theme .why-cta-btn {
+  background-color: #00295F !important;
+  color: #FFFFFF !important;
+  border-color: #00295F !important;
+}
+
+.light-theme .why-cta-btn:hover {
+  background-color: #003d8f !important;
+  border-color: #003d8f !important;
+  color: #FFFFFF !important;
+}
+
+/* Blend gradients on the images to clean white instead of dark blue in light theme */
+.light-theme #why-choose-us .bg-gradient-to-t {
+  background-image: linear-gradient(to top, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%) !important;
+}
+
+.light-theme #why-choose-us .bg-gradient-to-r {
+  background-image: linear-gradient(to right, transparent 0%, #FFFFFF 100%) !important;
+}
+
+.light-theme #why-choose-us .bg-gradient-to-l {
+  background-image: linear-gradient(to left, transparent 0%, #FFFFFF 100%) !important;
+}
+
+/* Founder & Director Card Photo Overlay Text light-theme overrides */
+.light-theme .director-message-card .director-card-name,
+.light-theme .director-card-name {
+  color: #FFFFFF !important;
+}
+
+.light-theme .director-message-card .director-card-position,
+.light-theme .director-card-position {
+  color: #5CBDF4 !important;
+}
+
+/* General Page Hero/Banner Light Theme Styling overrides */
+.light-theme section.bg-secondary-navy {
+  background-color: #F8FAFC !important;
+  border-bottom: 1px solid rgba(0, 41, 95, 0.08) !important;
+}
+
+.light-theme section.bg-secondary-navy h1 {
+  color: #00295F !important;
+}
+
+.light-theme section.bg-secondary-navy p.text-white\/70,
+.light-theme section.bg-secondary-navy p {
+  color: #334155 !important;
+}
+
+.light-theme section.bg-secondary-navy span.text-accent-blue,
+.light-theme section.bg-secondary-navy .text-accent-blue {
+  color: #0284C7 !important;
+}
+
+.light-theme section.bg-secondary-navy div.absolute.inset-0.opacity-15 {
+  opacity: 0.26 !important;
+  filter: grayscale(15%) contrast(115%) brightness(1.02) !important;
+}
+
+

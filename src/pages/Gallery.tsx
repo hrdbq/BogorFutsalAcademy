@@ -9,16 +9,29 @@ import {
   Camera, Calendar, Compass, ZoomIn, X, ChevronRight, ChevronLeft, ShieldCheck 
 } from 'lucide-react';
 import { GalleryItem } from '../types';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface GalleryProps {
   galleryItems: GalleryItem[];
 }
 
+function getDisplayCategory(cat: string, language: 'en' | 'id') {
+  if (language === 'en') return cat;
+  if (cat === 'All') return 'Semua';
+  if (cat === 'Training') return 'Latihan';
+  if (cat === 'Matches') return 'Laga Tanding';
+  if (cat === 'Events') return 'Kegiatan';
+  if (cat === 'Champions') return 'Prestasi Juara';
+  if (cat === 'Facilities') return 'Fasilitas';
+  return cat;
+}
+
 export default function Gallery({ galleryItems }: GalleryProps) {
+  const { language } = useLanguage();
   const [selectedTab, setSelectedTab] = useState<string>('All');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const categories = ['All', 'Training', 'Matches', 'Events', 'Champions', 'Facilities'];
+  const rawCategories = ['All', 'Training', 'Matches', 'Events', 'Champions', 'Facilities'];
 
   // Filters photo elements
   const filteredGallery = galleryItems.filter(item => {
@@ -48,13 +61,15 @@ export default function Gallery({ galleryItems }: GalleryProps) {
         <div className="absolute inset-0 opacity-15 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1518063319789-7217e6706b04?auto=format&fit=crop&q=80&w=1200')" }} />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
           <span className="font-mono text-xs font-bold text-accent-blue uppercase tracking-[0.25em] block mb-3">
-            LENS ON ATHLETICAL DEVELOPMENT
+            {language === 'en' ? 'LENS ON ATHLETICAL DEVELOPMENT' : 'KILAS DOKUMENTASI AKTIVITAS ATLET'}
           </span>
           <h1 className="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-white uppercase tracking-tight">
-            MEDIA GALLERY
+            {language === 'en' ? 'MEDIA GALLERY' : 'GALERI MEDIA'}
           </h1>
           <p className="text-white/70 max-w-2xl text-xs sm:text-sm leading-relaxed mt-3">
-            A visual documentation of hard work, discipline, tactical focus, and ecstatic championship campaigns. See our athletes active on the court surfaces.
+            {language === 'en'
+              ? 'A visual documentation of hard work, discipline, tactical focus, and ecstatic championship campaigns. See our athletes active on the court surfaces.'
+              : 'Dokumentasi visual kerja keras, kedisiplinan, fokus taktis, serta luapan kebahagiaan saat menjuarai kompetisi. Saksikan perjuangan aktif atlet-atlet kami di lapangan.'}
           </p>
         </div>
       </section>
@@ -64,11 +79,15 @@ export default function Gallery({ galleryItems }: GalleryProps) {
         <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-6">
           <div className="flex items-center space-x-2 text-white/50 text-xs font-mono">
             <Compass size={14} className="text-accent-blue" />
-            <span>Click any directory category to filter visual media archives:</span>
+            <span>
+              {language === 'en' 
+                ? 'Click any category to filter visual media archives:' 
+                : 'Pilih kategori berikut untuk menyaring arsip dokumentasi:'}
+            </span>
           </div>
 
           <div className="flex items-center bg-[#000d21]/60 p-1 rounded-lg border border-white/10 overflow-x-auto max-w-full scrollbar-none gap-1">
-            {categories.map((cat) => (
+            {rawCategories.map((cat) => (
               <button
                 key={cat}
                 id={`gallery-cat-${cat}`}
@@ -82,7 +101,7 @@ export default function Gallery({ galleryItems }: GalleryProps) {
                     : 'text-white/60 hover:text-white hover:bg-white/5'
                 }`}
               >
-                {cat}
+                {getDisplayCategory(cat, language)}
               </button>
             ))}
           </div>
@@ -123,23 +142,23 @@ export default function Gallery({ galleryItems }: GalleryProps) {
                     
                     <div className="space-y-1">
                       <span className="font-mono text-[9px] text-accent-blue font-bold tracking-wider uppercase block leading-none">
-                        {item.category} COLLECTION
+                        Koleksi {getDisplayCategory(item.category, language)}
                       </span>
                       <h4 className="font-display font-black text-sm text-white uppercase tracking-tight">
                         {item.title}
                       </h4>
                       <p className="text-white/40 font-mono text-[9px] block">
-                        Record logged: {item.date}
+                        {language === 'en' ? 'Record logged:' : 'Waktu pengambilan:'} {item.date}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Sub-text container for standard desktop clarity if hover is absent */}
+                {/* Sub-text container for standard mobile clarity if hover is absent */}
                 <div className="p-4 bg-secondary-navy/40 border-t border-white/5 flex items-center justify-between sm:hidden">
                   <div>
                     <h5 className="font-display font-bold text-xs text-white uppercase">{item.title}</h5>
-                    <span className="text-[9px] text-[#64B5E6] font-mono uppercase">{item.category}</span>
+                    <span className="text-[9px] text-[#64B5E6] font-mono uppercase">{getDisplayCategory(item.category, language)}</span>
                   </div>
                   <Camera size={12} className="text-white/40" />
                 </div>
@@ -150,8 +169,14 @@ export default function Gallery({ galleryItems }: GalleryProps) {
         ) : (
           <div className="text-center py-20 bg-secondary-navy/20 rounded-2xl border border-white/10">
             <Camera size={44} className="text-white/25 mx-auto mb-3" />
-            <span className="font-display font-bold text-white uppercase text-sm block">No media available in this category</span>
-            <p className="text-white/40 text-xs font-mono mt-1">Upload records in the Admin CMS to populate this library.</p>
+            <span className="font-display font-bold text-white uppercase text-sm block">
+              {language === 'en' ? 'No media available in this category' : 'Tidak ada foto di kategori ini'}
+            </span>
+            <p className="text-white/40 text-xs font-mono mt-1">
+              {language === 'en' 
+                ? 'Upload records in the Admin CMS to populate this library.' 
+                : 'Arsip foto akan diperbarui secara berkala oleh tim pengelola akademis.'}
+            </p>
           </div>
         )}
 
@@ -169,7 +194,7 @@ export default function Gallery({ galleryItems }: GalleryProps) {
             <button
               onClick={() => setLightboxIndex(null)}
               className="absolute top-6 right-6 p-2 rounded-full bg-primary-navy border border-white/10 text-white/70 hover:text-white transition-all min-h-[44px] cursor-pointer"
-              title="Close light box"
+              title={language === 'en' ? 'Close' : 'Tutup'}
             >
               <X size={20} />
             </button>
@@ -178,7 +203,7 @@ export default function Gallery({ galleryItems }: GalleryProps) {
             <button
               onClick={handlePrev}
               className="absolute left-4 p-3 rounded-xl bg-primary-navy/80 border border-white/10 text-white hover:text-accent-blue transition-all min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
-              title="Previous picture"
+              title={language === 'en' ? 'Previous picture' : 'Sebelumnya'}
             >
               <ChevronLeft size={24} />
             </button>
@@ -186,7 +211,7 @@ export default function Gallery({ galleryItems }: GalleryProps) {
             <button
               onClick={handleNext}
               className="absolute right-4 p-3 rounded-xl bg-primary-navy/80 border border-white/10 text-white hover:text-accent-blue transition-all min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
-              title="Next picture"
+              title={language === 'en' ? 'Next picture' : 'Selanjutnya'}
             >
               <ChevronRight size={24} />
             </button>
@@ -211,19 +236,19 @@ export default function Gallery({ galleryItems }: GalleryProps) {
               <div className="p-6 bg-[#000d21] flex justify-between items-center">
                 <div>
                   <span className="font-mono text-[9px] text-[#64B5E6] font-black tracking-widest uppercase block mb-1">
-                    {lightboxItem.category} CATEGORY
+                    Kategori {getDisplayCategory(lightboxItem.category, language)}
                   </span>
                   <h3 className="font-display font-black text-lg text-white uppercase tracking-tight">
                     {lightboxItem.title}
                   </h3>
                   <p className="text-white/40 text-xs font-mono mt-0.5">
-                    Logged: {lightboxItem.date}
+                    {language === 'en' ? 'Logged:' : 'Waktu Pengambilan:'} {lightboxItem.date}
                   </p>
                 </div>
                 
                 <div className="flex items-center space-x-2 text-[10px] uppercase font-mono text-white/50 bg-[#082C5A] border border-white/5 px-3 py-1.5 rounded-lg">
                   <ShieldCheck size={14} className="text-[#64B5E6]" />
-                  <span>BFA Authorized Media</span>
+                  <span>{language === 'en' ? 'BFA Certified Media' : 'Media Resmi Terverifikasi BFA'}</span>
                 </div>
               </div>
 
